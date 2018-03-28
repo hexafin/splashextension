@@ -75,7 +75,6 @@ const addExtensionButtonListener = () => {
           .catch(e => console.log(e))
 
         console.log("added current tab to open extensions", visibleExtensions)
-        //if i
       } else {
         //add contentscript and open extension in the new tab
 
