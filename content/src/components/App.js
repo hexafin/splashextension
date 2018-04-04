@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { colors, defaults, fonts } from "../../lib/constants";
-import Button from "./Button"
-import {LogoSmallColor} from "./Icons"
-import Input from "./Input"
+import { colors, defaults, fonts } from "../lib/constants";
+import Button from "./universal/Button"
+import {LogoSmallColor} from "./universal/Icons"
+import Input from "./universal/Input"
 import axios from "axios"
 
 class App extends Component {

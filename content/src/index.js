@@ -3,10 +3,10 @@ import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { Store, wrapStore } from "react-chrome-redux";
 
-import App from "./components/app/App";
+import App from "./components/App";
 import { parseSite } from "./scrape";
-import { actionTypes } from "../../../event/src/actions/app";
-import { messageTypes } from "../../../event/src/messageTypes";
+import { actionTypes } from "../../event/src/actions/app";
+import { messageTypes } from "../../event/src/messageTypes";
 import ChromePromise from "chrome-promise";
 const chromep = new ChromePromise();
 import { createStore, applyMiddleware } from "redux";
