@@ -60,7 +60,7 @@ class App extends Component {
 							this.setState(prevState => {
 								return {
 									...prevState,
-									relativeAmount: value
+									relativeAmount: event.target.value
 								}
 							})
 					}}/>
