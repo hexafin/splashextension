@@ -52,8 +52,6 @@ class App extends Component {
 				</div>
 				<div style={styles.body}>
 
-					
-
 					How much do you want to spend?
 
 					<Input name={"amount"} type={"number"} value={this.state.relativeAmount} onChange={(value) => {
@@ -97,19 +95,22 @@ const styles = {
 	title: {
 		fontSize: 20,
 		fontWeight: "600",
-		color: colors.darkGray
+		color: colors.darkGray,
+		fontFamily: fonts.primary
 	},
 	subtitle: {
 		fontSize: 14,
 		fontWeight: "500",
-		color: colors.darkGray
+		color: colors.darkGray,
+		fontFamily: fonts.primary
 	},
 	logo: {
 		padding: 5,
 		marginRight: 5
 	},
 	body: {
-		padding: 15
+		padding: 15,
+		fontFamily: fonts.primary
 	},
 	footer: {
 		padding: 15,

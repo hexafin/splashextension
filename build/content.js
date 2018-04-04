@@ -5225,9 +5225,7 @@ var colors = exports.colors = {
 };
 
 var fonts = exports.fonts = {
-	r: 'AvenirReg',
-	m: 'AvenirMed',
-	b: 'AvenirDemi'
+	primary: '"Avenir Next", -apple-system,system-ui, BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif'
 };
 
 var defaults = exports.defaults = {
@@ -13825,19 +13823,22 @@ var styles = {
 	title: {
 		fontSize: 20,
 		fontWeight: "600",
-		color: _constants.colors.darkGray
+		color: _constants.colors.darkGray,
+		fontFamily: _constants.fonts.primary
 	},
 	subtitle: {
 		fontSize: 14,
 		fontWeight: "500",
-		color: _constants.colors.darkGray
+		color: _constants.colors.darkGray,
+		fontFamily: _constants.fonts.primary
 	},
 	logo: {
 		padding: 5,
 		marginRight: 5
 	},
 	body: {
-		padding: 15
+		padding: 15,
+		fontFamily: _constants.fonts.primary
 	},
 	footer: {
 		padding: 15,
@@ -13915,7 +13916,8 @@ var styles = {
 		color: "white",
 		borderRadius: 5,
 		fontWeight: "600",
-		fontSize: 16
+		fontSize: 16,
+		fontFamily: _constants.fonts.primary
 	}
 };
 

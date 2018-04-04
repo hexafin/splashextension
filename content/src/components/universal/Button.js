@@ -21,7 +21,8 @@ const styles = {
 		color: "white",
 		borderRadius: 5,
 		fontWeight: "600",
-		fontSize: 16
+		fontSize: 16,
+		fontFamily: fonts.primary
 	}
 }
 

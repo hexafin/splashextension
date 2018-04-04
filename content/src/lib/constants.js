@@ -8,9 +8,7 @@ export const colors = {
 }
 
 export const fonts = {
-	r: 'AvenirReg',
-	m: 'AvenirMed',
-	b: 'AvenirDemi',
+	primary: '"Avenir Next", -apple-system,system-ui, BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif'
 }
 
 export const defaults = {
