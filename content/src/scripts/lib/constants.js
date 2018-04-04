@@ -1,18 +1,16 @@
 export const colors = {
-	fontdark: '#252525',
-	fontgrey: '#9A9A9A',
-	shadow: '#9A9A9A',
-	primary: '#007FFF',
+	dark: '#333',
+	grey: '#BFBFBF',
+	darkGrey: '#BBBBBB',
+	primary: '#4D00FF',
+	primaryHover: '#5D3EFF',
+	primaryLight: '#F3EFFF',
 }
 
 export const fonts = {
-	primary: '"Avenir Next", -apple-system,system-ui, BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif',
-	regular: 400,
-	medium: 500,
-	semi: 600,
-	bold: 700,
-	s: '15px',
-	m: '20px',
+	r: 'AvenirReg',
+	m: 'AvenirMed',
+	b: 'AvenirDemi',
 }
 
 export const defaults = {

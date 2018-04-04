@@ -1,4 +1,4 @@
-# Pineapple 🍍
+# Splash Extension
 
 Start: `yarn start`
 Dev: `gulp watch`

@@ -1969,103 +1969,103 @@ var chromep = new _chromePromise2.default();
 var visibleExtensions = {};
 
 var initBackgroundScript = function initBackgroundScript() {
-  addListeners();
-  initStore();
+    addListeners();
+    initStore();
 };
 
 var addListeners = function addListeners() {
-  addExtensionButtonListener();
-  addMessageListeners();
-  addCloseTabListener();
-  addRefreshListener();
+    addExtensionButtonListener();
+    addMessageListeners();
+    addCloseTabListener();
+    addRefreshListener();
 };
 var addRefreshListener = function addRefreshListener() {
-  chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-    delete visibleExtensions[tabId];
-  });
+    chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+        delete visibleExtensions[tabId];
+    });
 };
 
 var addCloseTabListener = function addCloseTabListener() {
-  chrome.tabs.onRemoved.addListener(function (tabId) {
-    delete visibleExtensions[tabId];
-    console.log("tab removed", tabId);
-  });
+    chrome.tabs.onRemoved.addListener(function (tabId) {
+        delete visibleExtensions[tabId];
+        console.log("tab removed", tabId);
+    });
 };
 
 var addExtensionButtonListener = function addExtensionButtonListener() {
-  chrome.browserAction.onClicked.addListener(function () {
-    getCurrentTabId().then(function (tabId) {
-      console.log("before", tabId, visibleExtensions);
-      //if current extension in tab is open already => close
-      if (visibleExtensions[tabId]) {
-        closeExtensionInTab(tabId).then(function (response) {
-          if (response.closedSuccessfully) {
-            visibleExtensions[tabId] = false;
-            console.log("visibleExtensions", visibleExtensions);
-          } else {
-            console.log("closing failed", response);
-          }
-        }).catch(function (e) {
-          return console.log(e);
+    chrome.browserAction.onClicked.addListener(function () {
+        getCurrentTabId().then(function (tabId) {
+            console.log("before", tabId, visibleExtensions);
+            //if current extension in tab is open already => close
+            if (visibleExtensions[tabId]) {
+                closeExtensionInTab(tabId).then(function (response) {
+                    if (response.closedSuccessfully) {
+                        visibleExtensions[tabId] = false;
+                        console.log("visibleExtensions", visibleExtensions);
+                    } else {
+                        console.log("closing failed", response);
+                    }
+                }).catch(function (e) {
+                    return console.log(e);
+                });
+            } else if (visibleExtensions[tabId] == false) {
+                //add currentTab to visibleExtensions
+                visibleExtensions[tabId] = true;
+                //reopen closed (i.e. htabIdden), but mounted extension
+                reopenExtensionInTab(tabId).then(function (response) {
+                    if (response.reopenedSuccessfully) {
+                        visibleExtensions[tabId] = true;
+                    } else {
+                        console.log("opening failed", response);
+                    }
+                }).catch(function (e) {
+                    return console.log(e);
+                });
+
+                console.log("added current tab to open extensions", visibleExtensions);
+            } else {
+                //add contentscript and open extension in the new tab
+
+                // sendFile()
+
+                chrome.tabs.executeScript({
+                    file: "./content.js"
+                });
+
+                visibleExtensions[tabId] = true;
+                console.log("after", tabId, visibleExtensions);
+            }
         });
-      } else if (visibleExtensions[tabId] == false) {
-        //add currentTab to visibleExtensions
-        visibleExtensions[tabId] = true;
-        //reopen closed (i.e. htabIdden), but mounted extension
-        reopenExtensionInTab(tabId).then(function (response) {
-          if (response.reopenedSuccessfully) {
-            visibleExtensions[tabId] = true;
-          } else {
-            console.log("opening failed", response);
-          }
-        }).catch(function (e) {
-          return console.log(e);
-        });
-
-        console.log("added current tab to open extensions", visibleExtensions);
-      } else {
-        //add contentscript and open extension in the new tab
-
-        // sendFile()
-
-        chrome.tabs.executeScript({
-          file: "./content.js"
-        });
-
-        visibleExtensions[tabId] = true;
-        console.log("after", tabId, visibleExtensions);
-      }
     });
-  });
 };
 
 var addMessageListeners = function addMessageListeners() {
-  chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-    switch (request.type) {
-      case _messageTypes.messageTypes.EXTENSION_WAS_CLOSED_BY_OUTSIDE_CLICK:
-        var tabId = sender.tab.id;
-        visibleExtensions[tabId] = false;
-        console.log("id", tabId, visibleExtensions);
-        sendResponse({ removedTabIdFromArray: true });
-        return;
-      case "GET_CURRENT_TAB_ID":
-        sendResponse({ tabId: sender.tab.id });
-        return;
-      case "PARTIAL_SCREENSHOT_TAKEN":
-        takeScreenshot(request).then(function (imgUrl) {
-          sendResponse({ imgUrl: imgUrl });
-        });
-        return true;
+    chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+        switch (request.type) {
+            case _messageTypes.messageTypes.EXTENSION_WAS_CLOSED_BY_OUTSIDE_CLICK:
+                var tabId = sender.tab.id;
+                visibleExtensions[tabId] = false;
+                console.log("id", tabId, visibleExtensions);
+                sendResponse({ removedTabIdFromArray: true });
+                return;
+            case "GET_CURRENT_TAB_ID":
+                sendResponse({ tabId: sender.tab.id });
+                return;
+            case "PARTIAL_SCREENSHOT_TAKEN":
+                takeScreenshot(request).then(function (imgUrl) {
+                    sendResponse({ imgUrl: imgUrl });
+                });
+                return true;
 
-      // cb.util.storeDataUrl(dataUrl, sender.url, 'clip', function() {
-      //     cb.background.startBadgeBlink()
-      //     callback()
-      // })
+            // cb.util.storeDataUrl(dataUrl, sender.url, 'clip', function() {
+            //     cb.background.startBadgeBlink()
+            //     callback()
+            // })
 
-      default:
-        return;
-    }
-  });
+            default:
+                return;
+        }
+    });
 };
 
 /**
@@ -2073,61 +2073,65 @@ var addMessageListeners = function addMessageListeners() {
  *
  */
 var takeScreenshot = function takeScreenshot(request) {
-  return chromep.tabs.captureVisibleTab(null, { format: "png", quality: 100 }).then(function (dataUrl) {
-    return new Promise(function (resolve, reject) {
-      console.log("ayyoo", request);
-      var left = request.left * request.devicePixelRatio;
-      var top = request.top * request.devicePixelRatio;
-      var width = request.width * request.devicePixelRatio;
-      var height = request.height * request.devicePixelRatio;
+    return chromep.tabs.captureVisibleTab(null, { format: "png", quality: 100 }).then(function (dataUrl) {
+        return new Promise(function (resolve, reject) {
+            console.log("ayyoo", request);
+            var left = request.left * request.devicePixelRatio;
+            var top = request.top * request.devicePixelRatio;
+            var width = request.width * request.devicePixelRatio;
+            var height = request.height * request.devicePixelRatio;
 
-      var canvas = document.createElement("canvas");
-      var ctx = canvas.getContext("2d");
-      var img = new Image();
-      console.log(width, height);
-      img.onload = function () {
-        canvas.width = width || img.width;
-        canvas.height = height || img.height;
-        if (width && height) {
-          ctx.drawImage(img, left, top, width, height, 0, 0, width, height);
-        } else {
-          ctx.drawImage(img, 0, 0);
-        }
-        resolve(canvas.toDataURL());
-      };
-      img.onerror = function (e) {
-        return reject(e);
-      };
-      img.src = dataUrl;
+            var canvas = document.createElement("canvas");
+            var ctx = canvas.getContext("2d");
+            var img = new Image();
+            console.log(width, height);
+            img.onload = function () {
+                canvas.width = width || img.width;
+                canvas.height = height || img.height;
+                if (width && height) {
+                    ctx.drawImage(img, left, top, width, height, 0, 0, width, height);
+                } else {
+                    ctx.drawImage(img, 0, 0);
+                }
+                resolve(canvas.toDataURL());
+            };
+            img.onerror = function (e) {
+                return reject(e);
+            };
+            img.src = dataUrl;
+        });
     });
-  });
 };
 
 var initStore = function initStore() {
-  var middleware = [(0, _reactChromeRedux.alias)(_aliases2.default), _reduxThunk2.default];
+    var middleware = [(0, _reactChromeRedux.alias)(_aliases2.default), _reduxThunk2.default];
 
-  //add any dev debug tools here
-  if (process.env.NODE_ENV !== "production") {
-    var logger = (0, _reduxLogger.createLogger)({ level: "info", collapsed: false, diff: true });
-    middleware = [].concat(_toConsumableArray(middleware), [logger]);
-  }
+    //add any dev debug tools here
+    if (process.env.NODE_ENV !== "production") {
+        var logger = (0, _reduxLogger.createLogger)({
+            level: "info",
+            collapsed: false,
+            diff: true
+        });
+        middleware = [].concat(_toConsumableArray(middleware), [logger]);
+    }
 
-  var store = (0, _redux.createStore)(_reducers2.default, _redux.applyMiddleware.apply(undefined, _toConsumableArray(middleware)));
+    var store = (0, _redux.createStore)(_reducers2.default, _redux.applyMiddleware.apply(undefined, _toConsumableArray(middleware)));
 
-  (0, _reactChromeRedux.wrapStore)(store, {
-    portName: "pineapple"
-  });
+    (0, _reactChromeRedux.wrapStore)(store, {
+        portName: "splash"
+    });
 };
 
 /*
 * @return number tabId (e.g. 152)
 */
 var getCurrentTabId = function getCurrentTabId() {
-  return chromep.tabs.query({ currentWindow: true, active: true }).then(function (tab) {
-    return tab[0].id;
-  }).catch(function (e) {
-    return console.log(e);
-  });
+    return chromep.tabs.query({ currentWindow: true, active: true }).then(function (tab) {
+        return tab[0].id;
+    }).catch(function (e) {
+        return console.log(e);
+    });
 };
 
 /*
@@ -2135,9 +2139,9 @@ var getCurrentTabId = function getCurrentTabId() {
 * @param number tabId
 */
 var closeExtensionInTab = function closeExtensionInTab(tabId) {
-  console.log("send closing message", tabId);
-  var message = { type: _messageTypes.messageTypes.CLOSE_EXTENSION_IN_TAB };
-  return chromep.tabs.sendMessage(tabId, message, {});
+    console.log("send closing message", tabId);
+    var message = { type: _messageTypes.messageTypes.CLOSE_EXTENSION_IN_TAB };
+    return chromep.tabs.sendMessage(tabId, message, {});
 };
 
 /*
@@ -2145,18 +2149,18 @@ var closeExtensionInTab = function closeExtensionInTab(tabId) {
 * @param number tabId
 */
 var reopenExtensionInTab = function reopenExtensionInTab(tabId) {
-  console.log("send opening message", tabId);
-  var message = { type: _messageTypes.messageTypes.REOPEN_EXTENSION_IN_TAB };
-  return chromep.tabs.sendMessage(tabId, message, {});
+    console.log("send opening message", tabId);
+    var message = { type: _messageTypes.messageTypes.REOPEN_EXTENSION_IN_TAB };
+    return chromep.tabs.sendMessage(tabId, message, {});
 };
 
 /*
 * @return new array of active Tab Ids
 */
 var removeTabIdFromArray = function removeTabIdFromArray(tabId, visibleExtensions) {
-  return visibleExtensions.filter(function (id) {
-    return id != tabId;
-  });
+    return visibleExtensions.filter(function (id) {
+        return id != tabId;
+    });
 };
 
 initBackgroundScript();

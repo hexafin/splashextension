@@ -51,30 +51,10 @@ const init = () => {
 	addReactApp();
 };
 
-// const pineappleIframe = document.createElement('iframe')
-
-// const addExtensionContainer = () => {
-// 	document.body.appendChild(pineappleIframe)
-// 	const iframeDoc = pineappleIframe.contentDocument
-// 	splashBox.id = 'splashBox'
-// 	splashBox.style = "position: fixed; width: 375px; background: white; z-index: 2147483647; top: 15px; right: 15px;border-radius: 3px; box-shadow: rgba(37, 53, 70, 0.4) 0px 6px 55px -16px;"
-// 	iframeDoc.body.appendChild(splashBox)
-
-// 	// document.body.appendChild(splashBox)
-// }
-
-// const addReactApp = () => {
-// 	render(
-// 	  <Provider store={store}>
-// 	    <App/>
-// 	  </Provider>
-// 	, splashBox)
-// }
-
 const addExtensionContainer = () => {
 	splashBox.id = "splashBox";
 	splashBox.style =
-		"position: fixed; width: 375px; background: white; z-index: 2147483647; top: 15px; right: 15px;border-radius: 3px; box-shadow: rgba(37, 53, 70, 0.4) 0px 6px 55px -16px;";
+		"position: fixed; width: 300px; background: white; z-index: 2147483647; top: 15px; right: 15px;border-radius: 3px; box-shadow: rgba(37, 53, 70, 0.4) 0px 6px 55px -16px;";
 	document.body.appendChild(splashBox);
 };
 
