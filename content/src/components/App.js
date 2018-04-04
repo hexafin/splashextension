@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { colors, defaults, fonts } from "../lib/constants";
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import { colors, defaults, fonts } from "../lib/constants"
 import Button from "./universal/Button"
-import {LogoSmallColor} from "./universal/Icons"
+import { LogoSmallColor } from "./universal/Icons"
 import Input from "./universal/Input"
+import StyleReset from "./StyleReset"
 import axios from "axios"
 
 class App extends Component {
-
 	constructor(props) {
 		super(props)
 
@@ -20,58 +20,64 @@ class App extends Component {
 	}
 
 	handleClick(e) {
-		axios.post("https://us-central1-hexa-splash.cloudfunctions.net/initializeTransaction", {
-			userId: "TGntKESxtoez4eKnc27R6wgsjr43",
-			extensionId: "sample-extension-id",
-			relativeAmount: this.state.relativeAmount,
-			relativeCurrency: "USD",
-			domain: this.state.domain
-		}).then(response => {
-			console.log(response)
-		}).catch(error => {
-			console.log(error)
-		})
+		axios
+			.post(
+				"https://us-central1-hexa-splash.cloudfunctions.net/initializeTransaction",
+				{
+					userId: "TGntKESxtoez4eKnc27R6wgsjr43",
+					extensionId: "sample-extension-id",
+					relativeAmount: this.state.relativeAmount,
+					relativeCurrency: "USD",
+					domain: this.state.domain
+				}
+			)
+			.then(response => {
+				console.log(response)
+			})
+			.catch(error => {
+				console.log(error)
+			})
 	}
 
 	render() {
-		console.log("props", this.props);
+		console.log("props", this.props)
 		console.log("state", this.state)
 
 		return (
-			<div style={styles.wrapper}>
-				<div style={styles.header}>
-					<div style={styles.logoWrapper}>
-						<div style={styles.logo}>
-							<LogoSmallColor/>
+			<StyleReset>
+				<div style={styles.wrapper}>
+					<div style={styles.header}>
+						<div style={styles.logoWrapper}>
+							<div style={styles.logo}>
+								<LogoSmallColor />
+							</div>
+							<div style={styles.title}>Splash</div>
 						</div>
-						<div style={styles.title}>Splash</div>
+						<div style={styles.subtitle}>Buy real things with bitcoin</div>
 					</div>
-					<div style={styles.subtitle}>
-						Buy real things with bitcoin
+					<div style={styles.body}>
+						How much do you want to spend?
+						<Input
+							name={"amount"}
+							type={"number"}
+							value={this.state.relativeAmount}
+							onChange={event => {
+								console.log(event.target)
+								this.setState(prevState => {
+									return {
+										...prevState,
+										relativeAmount: event.target.value
+									}
+								})
+							}}
+						/>
+					</div>
+					<div style={styles.footer}>
+						<Button onClick={this.handleClick}>Make a magic card</Button>
 					</div>
 				</div>
-				<div style={styles.body}>
-
-					How much do you want to spend?
-
-					<Input name={"amount"} type={"number"} value={this.state.relativeAmount}
-						onChange={event => {
-							console.log(event.target)
-							this.setState(prevState => {
-								return {
-									...prevState,
-									relativeAmount: event.target.value
-								}
-							})
-					}}/>
-				</div>
-				<div style={styles.footer}>
-					<Button onClick={this.handleClick}>
-						Make a magic card
-					</Button>
-				</div>
-			</div>
-		);
+			</StyleReset>
+		)
 	}
 }
 
@@ -126,7 +132,7 @@ const mapStateToProps = (state = initialState) => {
 	return {
 		...state.app,
 		...state.user
-	};
-};
+	}
+}
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(App)
