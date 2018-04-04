@@ -19,7 +19,7 @@ class App extends Component {
 		this.handleClick = this.handleClick.bind(this)
 	}
 
-	handleClick() {
+	handleClick(e) {
 		axios.post("https://us-central1-hexa-splash.cloudfunctions.net/initializeTransaction", {
 			userId: "TGntKESxtoez4eKnc27R6wgsjr43",
 			extensionId: "sample-extension-id",
@@ -54,13 +54,15 @@ class App extends Component {
 
 					How much do you want to spend?
 
-					<Input name={"amount"} type={"number"} value={this.state.relativeAmount} onChange={(value) => {
-						this.setState(prevState => {
-							return {
-								...prevState,
-								relativeAmount: value
-							}
-						})
+					<Input name={"amount"} type={"number"} value={this.state.relativeAmount}
+						onChange={event => {
+							console.log(event.target)
+							this.setState(prevState => {
+								return {
+									...prevState,
+									relativeAmount: value
+								}
+							})
 					}}/>
 				</div>
 				<div style={styles.footer}>

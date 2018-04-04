@@ -11,7 +11,7 @@ class Input extends Component {
         } = this.props
         return (
             <input type={type || "text"} key={name} id={name} value={value} name={name} 
-                onChange={() => onChange(document.getElementById(name).value)}
+                onChange={this.props.onChange}
                 style={{
                     padding: 15,
                     outline: "none",
