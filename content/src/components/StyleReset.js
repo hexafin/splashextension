@@ -6,9 +6,9 @@ const totalReset = {
 	fontFamily: `${fonts.primary}`
 }
 const StyleReset = props => (
-	<div id="pineapple" style={totalReset}>
-		<div id="pa-extra">
-			<div className="pineapple-base">{props.children}</div>
+	<div id="splash" style={totalReset}>
+		<div id="splash-extra">
+			<div className="splash-base">{props.children}</div>
 		</div>
 		<style jsx global>
 			{`

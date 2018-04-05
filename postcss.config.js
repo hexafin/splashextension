@@ -1,7 +1,7 @@
 module.exports = {
-  plugins: {
-  	'postcss-parent-selector': {selector: '#pineapple #pa-extra'}
-  }
+	plugins: {
+		"postcss-parent-selector": { selector: "#splash #splash-extra" }
+	}
 }
 
-  	// 'postcss-increase-specificity': {},
+// 'postcss-increase-specificity': {},

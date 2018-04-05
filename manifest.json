@@ -4,25 +4,27 @@
   "description": "React, Chrome, and Redux example",
   "version": "0.0.0.1",
   "background": {
-    "scripts": [
-      "event.js"
-    ],
+    "scripts": ["event.js"],
     "persistent": true
   },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "css": [],
+      "js": ["content.js"]
+    }
+  ],
   "browser_action": {
     "default_title": "RCR Example"
   },
-  "permissions": [ "activeTab", "tabs", "webRequest", "webNavigation", "storage", "cookies", "http://*/*", "https://*/*" ]
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "webRequest",
+    "webNavigation",
+    "storage",
+    "cookies",
+    "http://*/*",
+    "https://*/*"
+  ]
 }
-
-
- // "content_scripts": [
- //    {
- //      "matches": ["*://*/*"],
- //      "css": [],
- //      "js": ["content.js"]
- //    }
- //  ],
-
-    // "default_popup": "popup.html"
- 
