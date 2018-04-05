@@ -22,6 +22,10 @@ color: green;
 
 Make sure to use unique names (i.e. the component name) for classNames, because it's global namespace css.
 
+## Navigation
+
+Built a little router with redux. Just pull `{ goTo }` from props and use it like `onClick={() => goTo('ENTER_SPLASHTAG')}`. The 'routes' are defined in app.js, mapping the name to the corresponding component e.g. `ENTER_SPLASHTAG: EnterSplashtag`
+
 There are three folders:
 
 1.  popup --> where the content for a built in chrome popup would go
