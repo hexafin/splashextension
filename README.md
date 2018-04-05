@@ -6,6 +6,22 @@ Dev: `gulp watch`
 Auto refresh enabled
 Drag build directory to chrome extension folder.
 
+We're using [Ducks pattern](https://github.com/erikras/ducks-modular-redux) instead of traditional redux (it's faster). All it means is putting everything that's related to one domain into one file rather than spreading it over actions and reducers, etc.
+
+## Styles
+
+Because we're adding the extension into the page, we needed a workaround to make sure the styles are properly reset and prefixed, so they override everything outside the extension.
+--> Use styled jsx
+`<style jsx global>{`.componentName {
+background: red;
+
+.componentName-title {
+color: green;
+}
+`}</style>`
+
+Make sure to use unique names (i.e. the component name) for classNames, because it's global namespace css.
+
 There are three folders:
 
 1.  popup --> where the content for a built in chrome popup would go
