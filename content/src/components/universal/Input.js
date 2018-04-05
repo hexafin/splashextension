@@ -1,26 +1,51 @@
-import React, {Component} from "react"
-import {colors, defaults} from "../../lib/constants"
+import React, { Component } from "react"
+import { colors, defaults } from "../../lib/constants"
 
-class Input extends Component {
-    render() {
-        const {
-            name,
-            type,
-            onChange,
-            value
-        } = this.props
-        return (
-            <input type={type || "text"} key={name} id={name} value={value} name={name} 
-                onChange={this.props.onChange}
-                style={{
-                    padding: 15,
-                    outline: "none",
-                    border: "none",
-                    boxShadow: "rgba(37,53,70,.15) 0 6px 25px -3px",
-                    width: 180
-                }}/>
-        )
-    }
-}
+const Input = ({
+    isValid,
+    showCheckmark,
+    value,
+    placeholder,
+    handleChange
+}) => (
+    <div className="input-bar">
+        <input
+            onChange={handleChange}
+            value={value}
+            type="text"
+            placeholder={placeholder}
+        />
+        {showCheckmark && <Checkmark />}
+        <style jsx global>
+            {`
+                input {
+                    width: 220px;
+                    font-size: 18px;
+                    padding: 0 20px;
+                    color: ${!isValid ? "#ff3366" : colors.dark};
+                    border: none;
+                    height: 63px;
+                    outline: none;
+                    box-shadow: rgba(63, 63, 63, 0.09) 0 6px 34px 0;
+                    border-radius: 4px;
+                    -webkit-appearance: none;
+                    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+                }
+
+                .input-bar {
+                    position: relative;
+                }
+
+                input::placeholder {
+                    color: ${colors.grey};
+                }
+
+                input:focus {
+                    outline: none;
+                }
+            `}
+        </style>
+    </div>
+)
 
 export default Input

@@ -1,19 +1,16 @@
 import React from "react"
 import { render } from "react-dom"
 import { Provider } from "react-redux"
-import { Store, wrapStore } from "react-chrome-redux"
-
 import App from "./components/App"
 import { parseSite } from "./scrape"
-import { actionTypes } from "../../event/src/actions/app"
-import { messageTypes } from "../../event/src/messageTypes"
+import { actionTypes } from "./actionTypes"
+import { messageTypes } from "./messageTypes"
 import ChromePromise from "chrome-promise"
 const chromep = new ChromePromise()
 import { createStore, applyMiddleware } from "redux"
-import rootReducer from "./reducers"
+import rootReducer from "./modules"
 import { createLogger } from "redux-logger"
 import thunkMiddleware from "redux-thunk"
-import { getTabDetails } from "./actions/app"
 import { isCheckoutPage } from "./lib/creditCard"
 let store
 
@@ -32,15 +29,7 @@ const initStore = () => {
 
 	store = createStore(rootReducer, applyMiddleware(...middleware))
 	console.log("MAKINGSTORE")
-	getCurrentTabId()
-		.then(id => {
-			store.dispatch(getTabDetails(id))
-		})
-		.catch(e => console.log(e))
-
-	wrapStore(store, {
-		portName: "splash"
-	})
+	// store.dispatch()
 }
 
 const splashBox = document.createElement("div")
@@ -107,16 +96,6 @@ const addMessageListeners = () => {
 	chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 		console.log("incoming message", request, sender, sendResponse)
 		switch (request.type) {
-			case messageTypes.GET_LOCAL_SITE_DATA:
-				let siteData = {}
-				try {
-					siteData = parseSite(sender)
-				} catch (e) {
-					console.log("gotya", e)
-				} finally {
-					sendResponse(siteData)
-				}
-				return
 			case messageTypes.CLOSE_EXTENSION_IN_TAB:
 				try {
 					splashBox.parentNode.removeChild(splashBox)
@@ -158,10 +137,10 @@ const removeExtensionFromOpenExtensions = () => {
 }
 
 //start app
-// init();
+init()
 
-if (isCheckoutPage()) {
-	init()
-} else {
-	//do nothing
-}
+// if (isCheckoutPage()) {
+// 	init()
+// } else {
+// 	//do nothing
+// }
