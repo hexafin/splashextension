@@ -3,7 +3,6 @@ import { render } from "react-dom"
 import { Provider } from "react-redux"
 import App from "./components/App"
 import { parseSite } from "./scrape"
-import { actionTypes } from "./actionTypes"
 import { messageTypes } from "./messageTypes"
 import ChromePromise from "chrome-promise"
 const chromep = new ChromePromise()
@@ -100,7 +99,7 @@ const addMessageListeners = () => {
 				try {
 					splashBox.parentNode.removeChild(splashBox)
 					//remove click handler
-					removeOutsideClickListener()
+					// removeOutsideClickListener()
 				} catch (e) {
 					console.log("try catch", e)
 				} finally {
@@ -111,7 +110,7 @@ const addMessageListeners = () => {
 			case messageTypes.REOPEN_EXTENSION_IN_TAB:
 				try {
 					addExtensionContainer()
-					addOutsideClickListener()
+					// addOutsideClickListener()
 				} catch (e) {
 					console.log("opening did not work", e)
 				} finally {

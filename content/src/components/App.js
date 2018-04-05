@@ -16,11 +16,11 @@ const Components = {
 	PROMPT_FOR_PAY: PromptForPay
 }
 
-const App = ({ activeComponent, goTo }) => {
-	const ActiveComponent = Components[activeComponent]
+const App = props => {
+	const ActiveComponent = Components[props.activeComponent]
 	return (
 		<StyleReset>
-			<ActiveComponent />
+			<ActiveComponent {...props} />
 		</StyleReset>
 	)
 }

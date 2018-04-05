@@ -1,4 +1,3 @@
-import aliases from "./aliases"
 import ChromePromise from "chrome-promise"
 import { messageTypes } from "./messageTypes"
 const chromep = new ChromePromise()

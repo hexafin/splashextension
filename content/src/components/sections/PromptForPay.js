@@ -1,13 +1,13 @@
 import React from "react"
 import Button from "../universal/Button"
 
-export default ({ splashtag }) => (
+export default ({ splashtag, goTo }) => (
 	<div>
 		<div className="promptForPay-title">
 			Hey @{splashtag}, <br /> you can pay with Bitcoin.
 		</div>
 		<div>How does it work?</div>
-		<Button>Pay with Bitcoin</Button>
+		<Button onClick={() => goTo("ENTER_SPLASHTAG")}>Pay with Bitcoin</Button>
 		<div>Payment secured by Splash</div>
 		<style jsx global>
 			{`
