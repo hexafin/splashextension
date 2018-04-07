@@ -84,7 +84,7 @@ export default class extends Component {
 							color: ${colors.primary};
 							background: white;
 							padding: 5px 10px;
-							height: 14px;
+							height: 22px;
 							font-size: 13px;
 							opacity: 0;
 							border-radius: 3px;
