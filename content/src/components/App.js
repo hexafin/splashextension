@@ -10,12 +10,14 @@ import axios from "axios"
 import EnterSplashtag from "./sections/EnterSplashtag"
 import PromptForPay from "./sections/PromptForPay"
 import HowItWorks from "./sections/HowItWorks"
+import EnterAmount from "./sections/EnterAmount"
 import { goTo } from "../modules/app"
 
 const Components = {
 	ENTER_SPLASHTAG: EnterSplashtag,
 	PROMPT_FOR_PAY: PromptForPay,
-	HOW_IT_WORKS: HowItWorks
+	HOW_IT_WORKS: HowItWorks,
+	ENTER_AMOUNT: EnterAmount
 }
 
 const App = props => {

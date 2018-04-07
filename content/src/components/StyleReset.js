@@ -16,6 +16,17 @@ const StyleReset = props => (
 					text-rendering: optimizeLegibility;
 					-webkit-font-smoothing: antialiased;
 					-moz-osx-font-smoothing: grayscale;
+					transition: all 125ms ease;
+				}
+				a {
+					transition: all 150ms ease;
+					color: ${colors.grey};
+					text-decoration: none;
+					font-weight: 500;
+					font-family: ${fonts.primary};
+				}
+				a:hover {
+					color: ${colors.primaryHover};
 				}
 			`}
 		</style>

@@ -18,7 +18,7 @@ export default ({ splashtag, goTo }) => (
 		<div onClick={() => goTo("HOW_IT_WORKS")} className="promptForPay-tutorial">
 			How does it work?
 		</div>
-		<Button onClick={() => goTo("ENTER_SPLASHTAG")}>Pay with Bitcoin</Button>
+		<Button onClick={() => goTo("ENTER_AMOUNT")}>Pay with Bitcoin</Button>
 		<SecuredBy />
 		<style jsx global>
 			{`
@@ -32,6 +32,7 @@ export default ({ splashtag, goTo }) => (
 					font-weight: 500;
 					color: ${colors.grey};
 					cursor: pointer;
+					transition: all 150ms ease;
 				}
 
 				.promptForPay-tutorial:hover {
