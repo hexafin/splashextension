@@ -23,7 +23,7 @@ export default ({ splashtag, goTo }) => (
 		<style jsx global>
 			{`
 				.promptForPay-image {
-					width: 200px;
+					height: 155px;
 					margin: 0 auto;
 				}
 
