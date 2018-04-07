@@ -85,3 +85,55 @@ export const Lock = ({ color, height }) => (
 		</g>
 	</svg>
 )
+
+export const SmileLogo = ({ color, width }) => (
+	<svg width={width} height="100%" viewBox="0 0 17 22">
+		<g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+			<g id="Splash-Extension" transform="translate(-578.000000, -192.000000)">
+				<g id="Confirm-Amount" transform="translate(551.000000, 33.000000)">
+					<g id="Group-Copy-23" transform="translate(27.000000, 159.000000)">
+						<path
+							d="M8.34909041,21.6186644 C12.9601657,21.6186644 16.6981808,18.0649333 16.6981808,13.6811837 C16.6981808,9.29743414 9.91723945,0.114277435 8.34909041,0.114277435 C6.78094137,0.114277435 0,9.29743414 0,13.6811837 C0,18.0649333 3.7380151,21.6186644 8.34909041,21.6186644 Z"
+							id="Oval-3"
+							fill={color}
+						/>
+						<path
+							d="M4.8334257,16.0353841 C7.20326609,17.830948 9.65703483,17.830948 12.1947319,16.0353841"
+							id="Path-8"
+							stroke="#FFFFFF"
+							strokeWidth="1.14687971"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+						/>
+					</g>
+				</g>
+			</g>
+		</g>
+	</svg>
+)
+
+export const Drop = ({ color, height }) => (
+	<svg height={height} viewBox="0 0 8 11">
+		<g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+			<g
+				id="Splash-Extension"
+				transform="translate(-1754.000000, -266.000000)"
+				fill={color}
+			>
+				<g
+					id="Ready-to-go-expanded-card"
+					transform="translate(1570.000000, 32.000000)"
+				>
+					<g id="Group-10" transform="translate(19.000000, 224.000000)">
+						<g id="Group-Copy-4" transform="translate(165.000000, 10.000000)">
+							<path
+								d="M3.92898372,10.8093322 C6.09890152,10.8093322 7.85796745,9.03246663 7.85796745,6.84059185 C7.85796745,4.64871707 4.66693621,0.0571387174 3.92898372,0.0571387174 C3.19103123,0.0571387174 0,4.64871707 0,6.84059185 C0,9.03246663 1.75906593,10.8093322 3.92898372,10.8093322 Z"
+								id="Oval-3"
+							/>
+						</g>
+					</g>
+				</g>
+			</g>
+		</g>
+	</svg>
+)

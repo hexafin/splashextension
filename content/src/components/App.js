@@ -11,13 +11,17 @@ import EnterSplashtag from "./sections/EnterSplashtag"
 import PromptForPay from "./sections/PromptForPay"
 import HowItWorks from "./sections/HowItWorks"
 import EnterAmount from "./sections/EnterAmount"
+import WaitForAuthorization from "./sections/WaitForAuthorization"
+import CardCreated from "./sections/CardCreated"
 import { goTo } from "../modules/app"
 
 const Components = {
 	ENTER_SPLASHTAG: EnterSplashtag,
 	PROMPT_FOR_PAY: PromptForPay,
 	HOW_IT_WORKS: HowItWorks,
-	ENTER_AMOUNT: EnterAmount
+	ENTER_AMOUNT: EnterAmount,
+	WAIT_FOR_AUTHORIZATION: WaitForAuthorization,
+	CARD_CREATED: CardCreated
 }
 
 const App = props => {

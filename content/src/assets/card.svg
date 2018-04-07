@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="37px" height="20px" viewBox="0 0 37 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 9 Copy 3</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M0.982245931,1.96533313 C1.52472538,1.96533313 1.96449186,1.64226666 1.96449186,1.24374397 C1.96449186,0.845221286 1.16673405,0.0103888577 0.982245931,0.0103888577 C0.797757809,0.0103888577 0,0.845221286 0,1.24374397 C0,1.64226666 0.439766483,1.96533313 0.982245931,1.96533313 Z" id="path-1"></path>
+        <filter x="-76.4%" y="-76.7%" width="252.7%" height="253.5%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="0.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.24736926   0 0 0 0 0.24736926   0 0 0 0 0.24736926  0 0 0 0.0777287138 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <linearGradient x1="100%" y1="123.361573%" x2="17.8950295%" y2="-6.54551685%" id="linearGradient-4">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#202020" offset="100%"></stop>
+            <stop stop-color="#000000" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Splash-Extension" transform="translate(-1589.000000, -223.000000)">
+            <g id="Ready-to-go-expanded-card" transform="translate(1570.000000, 32.000000)">
+                <g id="Group-9-Copy-3" transform="translate(19.000000, 191.000000)">
+                    <rect id="Rectangle-14-Copy-2" fill="#EFEFFD" x="0" y="0" width="37" height="20" rx="1.00000001"></rect>
+                    <rect id="Rectangle" fill-opacity="0.560009058" fill="#B3B3FF" x="3" y="8" width="25" height="2"></rect>
+                    <rect id="Rectangle-Copy-2" fill-opacity="0.560009058" fill="#B3B3FF" x="3" y="13" width="9" height="2"></rect>
+                    <rect id="Rectangle-Copy-3" fill-opacity="0.560009058" fill="#B3B3FF" x="18" y="13" width="6" height="2"></rect>
+                    <g id="Group-Copy-6" transform="translate(33.000000, 2.000000)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <g id="Oval-3">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-1"></use>
+                            <use fill="#3F41FA" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        </g>
+                        <path d="M0.76195763,0.489680497 L0.982245931,0 C1.71498493,0.454999203 2.04698304,0.878924257 1.97824027,1.27177516 C1.87512611,1.86105152 1.6208739,1.99974927 0.969041821,1.95744097 C0.534487103,1.92923544 0.465459039,1.43998195 0.76195763,0.489680497 Z" id="Path-4" fill="url(#linearGradient-4)" opacity="0.0799932065" mask="url(#mask-2)"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
