@@ -13,6 +13,8 @@ import thunkMiddleware from "redux-thunk"
 import { isCheckoutPage } from "./lib/creditCard"
 let store
 
+chromep.storage.local.set({ splashtag: "bryce" }).then(r => console.log(r))
+
 const initStore = () => {
 	let middleware = [thunkMiddleware]
 
@@ -28,7 +30,12 @@ const initStore = () => {
 
 	store = createStore(rootReducer, applyMiddleware(...middleware))
 	console.log("MAKINGSTORE")
-	// store.dispatch()
+	chromep.storage.local
+		.get("splashtag")
+		.then(r => {
+			store.dispatch({ type: "UPDATE_SPLASHTAG", splashtag: r.splashtag })
+		})
+		.catch(e => console.log("e", e))
 }
 
 const splashBox = document.createElement("div")
@@ -71,10 +78,7 @@ export const closeOnOutsideClickHandler = event => {
 	const isClickInside = splashBox.contains(event.target)
 
 	if (!isClickInside) {
-		splashBox.parentNode.removeChild(splashBox)
-		removeExtensionFromOpenExtensions()
-			.then(r => console.log("successfullyRemovedfromarray"))
-			.catch(e => console.log(e))
+		closeExtension()
 		// removeOutsideClickListener()
 	}
 
@@ -129,7 +133,14 @@ const addMessageListeners = () => {
 	})
 }
 
-const removeExtensionFromOpenExtensions = () => {
+export const closeExtension = () => {
+	splashBox.parentNode.removeChild(splashBox)
+	removeExtensionFromOpenExtensions()
+		.then(r => console.log("tab removed", r))
+		.catch(e => console.log("not removed", e))
+}
+
+export const removeExtensionFromOpenExtensions = () => {
 	return chromep.runtime.sendMessage({
 		type: messageTypes.EXTENSION_WAS_CLOSED_BY_OUTSIDE_CLICK
 	})

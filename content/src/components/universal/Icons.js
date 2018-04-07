@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 
 export const LogoSmallColor = () => (
 	<svg
@@ -8,13 +8,7 @@ export const LogoSmallColor = () => (
 		version="1.1"
 		xmlns="http://www.w3.org/2000/svg"
 	>
-		<g
-			id="Page-1"
-			stroke="none"
-			strokeWidth="1"
-			fill="none"
-			fillRule="evenodd"
-		>
+		<g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
 			<g
 				id="Desktop-HD-Copy-4"
 				transform="translate(-232.000000, -39.000000)"
@@ -29,4 +23,65 @@ export const LogoSmallColor = () => (
 			</g>
 		</g>
 	</svg>
-);
+)
+
+export const Cancel = ({ color }) => (
+	<svg width="11px" height="11px" viewBox="0 0 11 11" version="1.1">
+		<g
+			id="Page-1"
+			stroke="none"
+			strokeWidth="1"
+			fill="none"
+			fillRule="evenodd"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+		>
+			<g
+				id="Splash-Extension"
+				transform="translate(-238.000000, -52.000000)"
+				stroke={color}
+				strokeWidth="1.42999998"
+			>
+				<g id="Starting-Screen" transform="translate(45.000000, 35.000000)">
+					<g id="Group-5" transform="translate(194.000000, 18.000000)">
+						<g id="Group-3">
+							<path d="M0,9 L9,0" id="Path-6" />
+							<path
+								d="M0,9 L9,0"
+								id="Path-6-Copy"
+								transform="translate(4.500000, 4.500000) rotate(90.000000) translate(-4.500000, -4.500000) "
+							/>
+						</g>
+					</g>
+				</g>
+			</g>
+		</g>
+	</svg>
+)
+
+export const Lock = ({ color, height }) => (
+	<svg height={height} viewBox="0 0 7 9" version="1.1">
+		<g
+			id="Page-1"
+			stroke="none"
+			strokeWidth="1"
+			fill="none"
+			fill-rule="evenodd"
+		>
+			<g
+				id="Splash-Extension"
+				transform="translate(-85.000000, -297.000000)"
+				fill={color}
+			>
+				<g id="Starting-Screen" transform="translate(45.000000, 35.000000)">
+					<g id="Group-4" transform="translate(40.000000, 261.000000)">
+						<path
+							d="M1.92857126,5.37142897 L5.01428528,5.37142897 L5.01428528,4.21428621 C5.01428528,3.78839126 4.86361716,3.42477886 4.56227639,3.12343809 C4.26093563,2.82209733 3.89732322,2.6714292 3.47142827,2.6714292 C3.04553332,2.6714292 2.68192092,2.82209733 2.38058015,3.12343809 C2.07923939,3.42477886 1.92857126,3.78839126 1.92857126,4.21428621 L1.92857126,5.37142897 Z M6.94285655,5.95000035 L6.94285655,9.42142862 C6.94285655,9.5821437 6.88660711,9.71874946 6.77410656,9.83125001 C6.66160601,9.94375057 6.52500024,10 6.36428517,10 L0.578571379,10 C0.417856303,10 0.281250538,9.94375057 0.168749985,9.83125001 C0.0562494327,9.71874946 0,9.5821437 0,9.42142862 L0,5.95000035 C0,5.78928527 0.0562494327,5.65267951 0.168749985,5.54017896 C0.281250538,5.4276784 0.417856303,5.37142897 0.578571379,5.37142897 L0.771428505,5.37142897 L0.771428505,4.21428621 C0.771428505,3.47499687 1.0366044,2.84018184 1.56696415,2.30982209 C2.0973239,1.77946234 2.73213893,1.51428644 3.47142827,1.51428644 C4.21071762,1.51428644 4.84553265,1.77946234 5.37589239,2.30982209 C5.90625214,2.84018184 6.17142804,3.47499687 6.17142804,4.21428621 L6.17142804,5.37142897 L6.36428517,5.37142897 C6.52500024,5.37142897 6.66160601,5.4276784 6.77410656,5.54017896 C6.88660711,5.65267951 6.94285655,5.78928527 6.94285655,5.95000035 Z"
+							id="lock---FontAwesome"
+						/>
+					</g>
+				</g>
+			</g>
+		</g>
+	</svg>
+)

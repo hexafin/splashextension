@@ -85,12 +85,12 @@ const addExtensionButtonListener = () => {
 const addMessageListeners = () => {
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         switch (request.type) {
-            // case messageTypes.EXTENSION_WAS_CLOSED_BY_OUTSIDE_CLICK:
-            //     const tabId = sender.tab.id
-            //     visibleExtensions[tabId] = false
-            //     console.log("id", tabId, visibleExtensions)
-            //     sendResponse({ removedTabIdFromArray: true })
-            //     return
+            case messageTypes.EXTENSION_WAS_CLOSED_BY_OUTSIDE_CLICK:
+                const tabId = sender.tab.id
+                visibleExtensions[tabId] = false
+                console.log("id", tabId, visibleExtensions)
+                sendResponse({ removedTabIdFromArray: true })
+                return
             case "GET_CURRENT_TAB_ID":
                 sendResponse({ tabId: sender.tab.id })
                 return

@@ -17,6 +17,7 @@
   "browser_action": {
     "default_title": "RCR Example"
   },
+  "web_accessible_resources": ["images/*.png"],
   "permissions": [
     "activeTab",
     "tabs",

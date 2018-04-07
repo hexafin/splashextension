@@ -9,11 +9,13 @@ import StyleReset from "./StyleReset"
 import axios from "axios"
 import EnterSplashtag from "./sections/EnterSplashtag"
 import PromptForPay from "./sections/PromptForPay"
+import HowItWorks from "./sections/HowItWorks"
 import { goTo } from "../modules/app"
 
 const Components = {
 	ENTER_SPLASHTAG: EnterSplashtag,
-	PROMPT_FOR_PAY: PromptForPay
+	PROMPT_FOR_PAY: PromptForPay,
+	HOW_IT_WORKS: HowItWorks
 }
 
 const App = props => {

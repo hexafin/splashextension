@@ -1,6 +1,9 @@
 export const colors = {
 	dark: "#333",
-	grey: "#BFBFBF",
+	grey: "#B4B4B4",
+	lightGrey: "#9F9EA3",
+	iconGrey: "#C9C9C9",
+	hoverGrey: "#FBFBFB",
 	darkGrey: "#BBBBBB",
 	primary: "#4D00FF",
 	primaryHover: "#5D3EFF",
@@ -9,7 +12,7 @@ export const colors = {
 
 export const fonts = {
 	primary:
-		'-apple-system,system-ui, BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif'
+		'"Avenir Next", -apple-system,system-ui, BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif'
 }
 
 export const defaults = {
