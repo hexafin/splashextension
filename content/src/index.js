@@ -43,7 +43,7 @@ const init = () => {
 const addExtensionContainer = () => {
 	splashBox.id = "splashBox"
 	splashBox.style =
-		"position: fixed; width: 300px; background: white; z-index: 2147483647; top: 15px; right: 15px;border-radius: 3px; box-shadow: rgba(37, 53, 70, 0.4) 0px 6px 55px -16px;"
+		"position: fixed; width: 260px; background: white; z-index: 2147483647; top: 15px; right: 15px;border-radius: 5px; box-shadow: rgba(37, 53, 70, 0.45) 0px 6px 55px -16px;"
 	document.body.appendChild(splashBox)
 }
 
