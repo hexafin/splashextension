@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { colors, fonts } from "../../lib/constants"
 
-const Button = ({ children, disabled, onClick, width }) => {
+const Button = ({ children, disabled, onClick }) => {
 	let classes = []
 	if (disabled) {
 		classes.push("disabled")
@@ -14,27 +14,22 @@ const Button = ({ children, disabled, onClick, width }) => {
 				{`
 					button {
 						margin: 0;
-						margin-left: 12px;
 						top: -2px;
-						font-size: 18px;
-						height: 63px;
-						padding: 18px 25px;
-						background: #5c16ff;
+						font-size: 16px;
+						font-weight: 600;
+						height: 50px;
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+						align-items: center;
+						background: ${colors.primary};
 						color: white;
 						border-radius: 4px;
 						border: none;
-						width: 188px;
+						width: 200px;
 						font-family: ${fonts.primary};
 						box-shadow: rgba(63, 63, 63, 0.08) 0 6px 14px 0;
 						transition: all 150ms cubic-bezier(0.21, 0.94, 0.64, 0.99);
-					}
-
-					@media (max-width: 550px) {
-						button {
-							width: 100%;
-							margin-left: 0;
-							margin-top: 18px;
-						}
 					}
 
 					button:focus {
