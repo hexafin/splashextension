@@ -7,6 +7,7 @@ import SecuredBy from "../universal/SecuredBy"
 import ContentWrapper from "../universal/ContentWrapper"
 import ContentTitle from "../universal/ContentTitle"
 import Card from "../universal/Card"
+import ExpandableBox from "../universal/ExpandableBox"
 
 export default class extends Component {
 	constructor(props) {
@@ -51,7 +52,11 @@ export default class extends Component {
 					</div>
 				)}
 				<div className="CardCreated-support">
-					<div className="CardCreated-text">My card won't work</div>
+					<ExpandableBox title="My card won't work">
+						We apologize, bitcoin > banks. Check that everything is correct, but
+						don’t worry, we’ll automatically return the money to your Splash
+						account if you don’t use it within one hour.
+					</ExpandableBox>
 					<div className="CardCreated-text">
 						Need help? <a href="mailto:support@hexafinancial.com">Reach out!</a>
 					</div>
@@ -83,6 +88,7 @@ export default class extends Component {
 							margin-left: 12px;
 							font-weight: 500;
 							cursor: pointer;
+							user-select: none;
 							color: ${showCard ? colors.primary : colors.fontdark};
 						}
 
@@ -105,9 +111,7 @@ export default class extends Component {
 							text-align: left;
 							font-weight: 500;
 							color: ${colors.grey};
-							cursor: pointer;
 							font-size: 14px;
-							margin-top: 7px;
 							transition: all 150ms ease;
 						}
 					`}

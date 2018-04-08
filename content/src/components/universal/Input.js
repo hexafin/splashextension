@@ -19,9 +19,10 @@ const Input = ({
         <style jsx global>
             {`
                 input {
-                    width: 220px;
+                    width: 100%;
                     font-size: 18px;
                     padding: 0 20px;
+                    font-weight: 500;
                     color: ${!isValid ? "#ff3366" : colors.dark};
                     border: none;
                     height: 63px;

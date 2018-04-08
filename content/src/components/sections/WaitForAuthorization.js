@@ -28,7 +28,7 @@ export default ({ splashtag, goTo }) => (
 			Wrong amount?{" "}
 			<span
 				className="WaitForAuthorization-link"
-				onClick={() => console.log("cancel")}
+				onClick={() => goTo("CARD_CREATED")}
 			>
 				Cancel transaction
 			</span>
