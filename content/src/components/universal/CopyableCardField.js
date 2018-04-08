@@ -83,12 +83,11 @@ export default class extends Component {
 							background: white;
 							color: ${colors.primary};
 							background: white;
-							padding: 5px 10px;
+							padding: 0 10px;
 							height: 22px;
 							font-size: 13px;
 							opacity: 0;
 							border-radius: 3px;
-							width: 70px;
 							transition: all 120ms ease;
 							box-shadow: rgba(37, 53, 70, 0.1) 0 2px 17px 0px;
 							display: flex;
@@ -114,4 +113,3 @@ export default class extends Component {
 		)
 	}
 }
-
