@@ -1,7 +1,7 @@
 import React from "react"
 import Button from "../universal/Button"
 import promptGraphic from "../../assets/promptGraphic.png"
-import { colors, fonts } from "../../lib/constants"
+import { colors } from "../../lib/constants"
 import SecuredBy from "../universal/SecuredBy"
 import ContentWrapper from "../universal/ContentWrapper"
 import ContentTitle from "../universal/ContentTitle"

@@ -1,7 +1,7 @@
 import { closeExtension } from "../index"
 const initialState = {
 	splashtag: "",
-	activeComponent: "CARD_CREATED"
+	activeComponent: "PROMPT_FOR_PAY"
 }
 
 const GO_TO = "GO_TO"
