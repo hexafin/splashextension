@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { colors, fonts, defaults } from "../../lib/constants"
+import { colors } from "../../lib/constants"
 
 export default class extends Component {
 	constructor(props) {
@@ -19,6 +19,22 @@ export default class extends Component {
 
 	render() {
 		const { children, label } = this.props
+		const cc_format = value => {
+			var v = value.replace(/\s+/g, "").replace(/[^0-9]/gi, "")
+			var matches = v.match(/\d{4,16}/g)
+			var match = (matches && matches[0]) || ""
+			var parts = []
+
+			for (var i = 0, len = match.length; i < len; i += 4) {
+				parts.push(match.substring(i, i + 4))
+			}
+
+			if (parts.length) {
+				return parts.join(" ")
+			} else {
+				return value
+			}
+		}
 		const copyToClipboard = content => {
 			const dummy = document.createElement("input")
 			dummy.type = "text"
@@ -30,6 +46,16 @@ export default class extends Component {
 			document.execCommand("copy")
 			dummy.parentNode.removeChild(dummy)
 			this.setState({ copySuccess: true })
+		}
+
+		const getFieldContent = () => {
+			if (label == "Card Number") {
+				return cc_format(children)
+			}
+			if (label == "Expiry") {
+				return `${children.substring(0, 2)}/${children.substring(2, 4)}`
+			}
+			return children
 		}
 
 		return (
@@ -45,7 +71,7 @@ export default class extends Component {
 							{this.state.copySuccess ? "Copied!" : "Copy"}
 						</div>
 					</div>
-					<div>{children}</div>
+					<div>{getFieldContent()}</div>
 				</div>
 				<style jsx global>
 					{`
