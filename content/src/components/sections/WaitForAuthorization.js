@@ -1,63 +1,80 @@
-import React from "react"
+import React, {Component} from "react"
 import Button from "../universal/Button"
 import authorizeImg from "../../assets/authorize.png"
 import { colors, fonts } from "../../lib/constants"
 import SecuredBy from "../universal/SecuredBy"
 import ContentWrapper from "../universal/ContentWrapper"
 import ContentTitle from "../universal/ContentTitle"
+import { watchTransaction } from "../../api"
 
-export default ({ splashtag, goTo }) => (
-	<ContentWrapper>
-		<ContentTitle>
-			Authorize purchase on <br /> your phone
-		</ContentTitle>
-		<img
-			className="WaitForAuthorization-image"
-			src={chrome.extension.getURL(authorizeImg)}
-		/>
-		<div className="WaitForAuthorization-text">
-			Open the Splash app to authorize your purchase
-		</div>
-		<div className="WaitForAuthorization-text">
-			Don’t have the app?{" "}
-			<a href="https://splashwallet.io" target="_blank">
-				Download here
-			</a>
-		</div>
-		<div style={{ marginBottom: "20px" }} className="WaitForAuthorization-text">
-			Wrong amount?{" "}
-			<span
-				className="WaitForAuthorization-link"
-				onClick={() => goTo("CARD_CREATED")}
-			>
-				Cancel transaction
-			</span>
-		</div>
+export default ({ splashtag, transactionId, goTo, updateCard }) => {
 
-		<style jsx global>
-			{`
-				.WaitForAuthorization-image {
-					height: 116px;
-					margin: 30px auto 23px;
-				}
+	watchTransaction(transactionId, "txId", (txId) => {
+		// should go to generating card screen
+		// goTo("GENERATING_CARD")
+		console.log(transactionId, txId)
+	})
 
-				.WaitForAuthorization-link {
-					cursor: pointer;
-				}
-				.WaitForAuthorization-link:hover {
-					color: ${colors.primaryHover};
-				}
+	// generating card screen should implement the following watch
+	watchTransaction(transactionId, "card", (card) => {
+		updateCard(card)
+		goTo("CARD_CREATED")
+	})
 
-				.WaitForAuthorization-text {
-					text-align: center;
-					font-weight: 500;
-					color: ${colors.grey};
-					font-size: 14px;
-					padding: 0 10px;
-					margin-top: 7px;
-					transition: all 150ms ease;
-				}
-			`}
-		</style>
-	</ContentWrapper>
-)
+	return (
+		<ContentWrapper>
+			<ContentTitle>
+				Authorize purchase on <br /> your phone
+			</ContentTitle>
+			<img
+				className="WaitForAuthorization-image"
+				src={chrome.extension.getURL(authorizeImg)}
+			/>
+			<div className="WaitForAuthorization-text">
+				Open the Splash app to authorize your purchase
+			</div>
+			<div className="WaitForAuthorization-text">
+				Don’t have the app?{" "}
+				<a href="https://splashwallet.io" target="_blank">
+					Download here
+				</a>
+			</div>
+			<div style={{ marginBottom: "20px" }} className="WaitForAuthorization-text">
+				Wrong amount?{" "}
+				<span
+					className="WaitForAuthorization-link"
+					onClick={() => goTo("CARD_CREATED")}
+				>
+					Cancel transaction
+				</span>
+			</div>
+
+			<style jsx global>
+				{`
+					.WaitForAuthorization-image {
+						height: 116px;
+						margin: 30px auto 23px;
+					}
+
+					.WaitForAuthorization-link {
+						cursor: pointer;
+					}
+					.WaitForAuthorization-link:hover {
+						color: ${colors.primaryHover};
+					}
+
+					.WaitForAuthorization-text {
+						text-align: center;
+						font-weight: 500;
+						color: ${colors.grey};
+						font-size: 14px;
+						padding: 0 10px;
+						margin-top: 7px;
+						transition: all 150ms ease;
+					}
+				`}
+			</style>
+		</ContentWrapper>
+	)
+
+}

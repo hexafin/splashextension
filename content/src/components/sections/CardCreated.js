@@ -23,6 +23,10 @@ export default class extends Component {
 	}
 
 	render() {
+
+		const { card } = this.props
+		// TODO: use card details from redux state
+
 		const { showCard } = this.state
 		return (
 			<ContentWrapper>

@@ -147,10 +147,10 @@ export const removeExtensionFromOpenExtensions = () => {
 }
 
 //start app
-init()
+// init()
 
-// if (isCheckoutPage()) {
-// 	init()
-// } else {
-// 	//do nothing
-// }
+if (isCheckoutPage()) {
+	init()
+} else {
+	//do nothing
+}

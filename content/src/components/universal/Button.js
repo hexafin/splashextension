@@ -1,15 +1,15 @@
 import React, { Component } from "react"
 import { colors, fonts } from "../../lib/constants"
 
-const Button = ({ children, disabled, onClick, width }) => {
+const Button = ({ children, onClick, disabled=false, loading=false }) => {
 	let classes = []
 	if (disabled) {
 		classes.push("disabled")
 	}
 	return (
-		<button className={classes.join(" ")} onClick={onClick}>
-			{children}
-
+		<button disabled={disabled} className={classes.join(" ")} onClick={onClick}>
+			{!loading && children}
+			{loading && "loading..."}
 			<style jsx global>
 				{`
 					button {
