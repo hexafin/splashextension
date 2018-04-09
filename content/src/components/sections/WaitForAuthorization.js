@@ -10,15 +10,8 @@ import { watchTransaction } from "../../api"
 export default ({ splashtag, transactionId, goTo, updateCard }) => {
 
 	watchTransaction(transactionId, "txId", (txId) => {
-		// should go to generating card screen
-		// goTo("GENERATING_CARD")
-		console.log(transactionId, txId)
-	})
-
-	// generating card screen should implement the following watch
-	watchTransaction(transactionId, "card", (card) => {
-		updateCard(card)
-		goTo("CARD_CREATED")
+		goTo("WAIT_FOR_CARD")
+		console.log(transactionId, "txId", txId)
 	})
 
 	return (
