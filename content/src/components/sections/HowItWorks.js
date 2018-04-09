@@ -8,6 +8,7 @@ import confirmBullet from "../../assets/confirmBullet.png"
 import cardBullet from "../../assets/cardBullet.png"
 import authorizeBullet from "../../assets/authorizeBullet.png"
 
+
 export default ({ splashtag, goTo }) => (
 	<ContentWrapper>
 		<ContentTitle left>It's easy.</ContentTitle>
@@ -22,7 +23,6 @@ export default ({ splashtag, goTo }) => (
 			We create a one-time card and autofill everything. Just click pay!{" "}
 		</BulletPoint>
 		<div style={{ height: "10px" }} />
-
 		<Button onClick={() => goTo("ENTER_AMOUNT")}>Pay with Bitcoin</Button>
 		<SecuredBy />
 		<style jsx global>

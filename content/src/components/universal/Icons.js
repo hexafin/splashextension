@@ -66,7 +66,7 @@ export const Lock = ({ color, height }) => (
 			stroke="none"
 			strokeWidth="1"
 			fill="none"
-			fill-rule="evenodd"
+			fillRule="evenodd"
 		>
 			<g
 				id="Splash-Extension"

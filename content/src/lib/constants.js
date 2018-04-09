@@ -8,7 +8,8 @@ export const colors = {
 	darkGrey: "#BBBBBB",
 	primary: "#4D00FF",
 	primaryHover: "#5D3EFF",
-	primaryLight: "#F3EFFF"
+	primaryLight: "#F3EFFF",
+	primaryMedium: "#A5A1F3"
 }
 
 export const fonts = {
