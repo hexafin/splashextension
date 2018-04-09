@@ -9,12 +9,12 @@ import { SmileLogo } from "../universal/Icons"
 
 export default ({ splashtag, goTo }) => (
 	<ContentWrapper>
-		<ContentTitle>Enter the final amount you need in USD</ContentTitle>
+		<ContentTitle>How much money (in USD) do you need?</ContentTitle>
 		<div style={{ height: "25px" }} />
-		<Input isValid placeholder="e.g. 24.99" />
+		<Input isValid autoFocus type="number" placeholder="e.g. 24.99" />
 		<Hint>
-			We’ll load this amount on a magic one-time credit card. Make sure it’s
-			correct!
+			After you authorize on your phone, we’ll load this amount on a magic
+			one-time credit card.
 		</Hint>
 		<Button onClick={() => goTo("WAIT_FOR_AUTHORIZATION")}>
 			Confirm USD amount

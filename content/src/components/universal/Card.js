@@ -11,7 +11,7 @@ const Card = ({ number, expiration, cvc, postal }) => (
 				<Drop height="16px" color={colors.primary} />
 			</div>
 			<div className="Card-row">
-				<CopyableCardField label="Expiration">09/12</CopyableCardField>
+				<CopyableCardField label="Expiry">0912</CopyableCardField>
 				<CopyableCardField label="CVC">949</CopyableCardField>
 				<CopyableCardField label="Postal">10002</CopyableCardField>
 			</div>

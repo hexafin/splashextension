@@ -9,7 +9,7 @@ import ContentTitle from "../universal/ContentTitle"
 export default ({ splashtag, goTo }) => (
 	<ContentWrapper>
 		<ContentTitle left>
-			Hey @{splashtag}, <br /> you can pay with Bitcoin.
+			Hey @{splashtag}, <br /> you can pay here with Bitcoin.
 		</ContentTitle>
 		<img
 			className="promptForPay-image"
