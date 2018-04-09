@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { colors, fonts } from "../../lib/constants"
 
 const Button = ({ children, disabled, onClick, width }) => {
-	let classes = []
+	let classes = ["splash-btn"]
 	if (disabled) {
 		classes.push("disabled")
 	}
@@ -12,12 +12,13 @@ const Button = ({ children, disabled, onClick, width }) => {
 
 			<style jsx global>
 				{`
-					button {
+					.splash-btn {
 						top: -2px;
 						font-size: 18px;
 						padding: 13px 25px;
 						background: #5c16ff;
 						color: white;
+						height: auto;
 						border-radius: 4px;
 						border: none;
 						width: 188px;
@@ -33,11 +34,11 @@ const Button = ({ children, disabled, onClick, width }) => {
 						letter-spacing: initial;
 					}
 
-					button:focus {
+					.splash-btn:focus {
 						outline: 0;
 					}
 
-					button:hover {
+					.splash-btn:hover {
 						background: ${colors.primaryHover};
 						color: white;
 						cursor: pointer;
