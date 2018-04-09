@@ -12,6 +12,7 @@ import PromptForPay from "./sections/PromptForPay"
 import HowItWorks from "./sections/HowItWorks"
 import EnterAmount from "./sections/EnterAmount"
 import WaitForAuthorization from "./sections/WaitForAuthorization"
+import WaitForCard from "./sections/WaitForCard"
 import CardCreated from "./sections/CardCreated"
 import { goTo, startTransaction, updateAmount, updateCard } from "../modules/app"
 
@@ -21,6 +22,7 @@ const Components = {
 	HOW_IT_WORKS: HowItWorks,
 	ENTER_AMOUNT: EnterAmount,
 	WAIT_FOR_AUTHORIZATION: WaitForAuthorization,
+	WAIT_FOR_CARD: WaitForCard,
 	CARD_CREATED: CardCreated
 }
 
