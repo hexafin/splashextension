@@ -52,7 +52,6 @@ export default ({ splashtag, goTo }) => (
 					text-align: center;
 					font-weight: 500;
 					color: ${colors.grey};
-					cursor: pointer;
 					font-size: 14px;
 					padding: 0 10px;
 					margin-top: 7px;

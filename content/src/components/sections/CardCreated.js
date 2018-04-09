@@ -73,6 +73,7 @@ export default class extends Component {
 						.CardCreated-cardHeaderSection {
 							display: flex;
 							align-items: center;
+							cursor: pointer;
 						}
 
 						.CardCreated-cardSmall {
@@ -87,7 +88,6 @@ export default class extends Component {
 						.CardCreated-cardHeader {
 							margin-left: 12px;
 							font-weight: 500;
-							cursor: pointer;
 							user-select: none;
 							color: ${showCard ? colors.primary : colors.fontdark};
 						}
@@ -104,7 +104,7 @@ export default class extends Component {
 						}
 
 						.CardCreated-support {
-							margin-top: 35px;
+							margin-top: 25px;
 						}
 
 						.CardCreated-text {

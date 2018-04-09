@@ -28,6 +28,9 @@ const Button = ({ children, disabled, onClick, width }) => {
 						width: 100%;
 						margin-left: 0;
 						margin-top: 18px;
+						box-sizing: border-box;
+						text-transform: none;
+						letter-spacing: initial;
 					}
 
 					button:focus {
