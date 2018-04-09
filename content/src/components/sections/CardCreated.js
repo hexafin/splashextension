@@ -68,6 +68,8 @@ export default class extends Component {
 						.CardCreated-image {
 							height: 96px;
 							margin: 30px auto 33px;
+							position: relative;
+							right: 4px;
 						}
 
 						.CardCreated-cardHeaderSection {
