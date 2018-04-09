@@ -25,6 +25,8 @@ export default ({ splashtag, goTo }) => (
 				.promptForPay-image {
 					height: 155px;
 					margin: 0 auto;
+					position: relative;
+					right: 7px;
 				}
 
 				.promptForPay-tutorial {

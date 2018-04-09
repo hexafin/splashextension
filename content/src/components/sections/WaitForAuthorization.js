@@ -39,6 +39,8 @@ export default ({ splashtag, goTo }) => (
 				.WaitForAuthorization-image {
 					height: 116px;
 					margin: 30px auto 23px;
+					position: relative;
+					right: 3px;
 				}
 
 				.WaitForAuthorization-link {
