@@ -13,3 +13,17 @@ export const isCheckoutPage = () => {
 	return hasCreditCardInput
 }
 
+export const creditCard = {
+	getExpiryField: () => {
+		const expiry = document.querySelectorAll('[autocomplete="cc-exp"]')
+		return expiry
+	},
+	getNumberField: () => {
+		const number = document.querySelectorAll('[autocomplete="cc-number"]')
+		return number
+	},
+	getCVCField: () => {
+		const cvc = document.querySelectorAll('[autocomplete="cc-csc"]')
+		return cvc
+	}
+}

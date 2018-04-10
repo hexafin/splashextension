@@ -8,6 +8,7 @@ import ContentWrapper from "../universal/ContentWrapper"
 import ContentTitle from "../universal/ContentTitle"
 import Card from "../universal/Card"
 import ExpandableBox from "../universal/ExpandableBox"
+import { creditCard } from "../../lib/creditCard"
 
 export default class extends Component {
 	constructor(props) {
@@ -18,12 +19,17 @@ export default class extends Component {
 		this.toggleCard = this.toggleCard.bind(this)
 	}
 
+	componentDidMount() {
+		console.log("exp", creditCard.getExpiryField())
+		console.log("number", creditCard.getNumberField())
+		console.log("cvc", creditCard.getCVCField())
+	}
+
 	toggleCard() {
 		this.setState({ showCard: !this.state.showCard })
 	}
 
 	render() {
-
 		const { card } = this.props
 		// TODO: use card details from redux state
 
@@ -31,8 +37,7 @@ export default class extends Component {
 		return (
 			<ContentWrapper>
 				<ContentTitle>
-					Card details auto-filled. <br />
-					Ready to go!
+					Card created. Click the numbers to copy! <br />
 				</ContentTitle>
 				<img
 					className="CardCreated-image"

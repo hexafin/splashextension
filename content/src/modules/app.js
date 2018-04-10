@@ -33,7 +33,6 @@ const UPDATE_CARD = "UPDATE_CARD"
 
 export default (state = initialState, action) => {
 	switch (action.type) {
-		
 		case GO_TO:
 			return {
 				...state,
@@ -94,23 +93,28 @@ export const startTransactionInit = () => {
 	}
 }
 
-export const startTransactionSuccess = (transactionId) => {
+export const startTransactionSuccess = transactionId => {
 	return {
 		type: START_TRANSACTION_SUCCESS,
 		transactionId
 	}
 }
 
-export const startTransactionFailure = (error) => {
+export const startTransactionFailure = error => {
 	return {
 		type: START_TRANSACTION_FAILURE,
 		error
 	}
 }
 
-export const startTransaction = (splashtag, amount, userId="TGntKESxtoez4eKnc27R6wgsjr43", extensionId="test", currency="USD") => {
+export const startTransaction = (
+	splashtag,
+	amount,
+	userId = "TGntKESxtoez4eKnc27R6wgsjr43",
+	extensionId = "test",
+	currency = "USD"
+) => {
 	return dispatch => {
-
 		dispatch(startTransactionInit())
 
 		const params = {
@@ -122,18 +126,20 @@ export const startTransaction = (splashtag, amount, userId="TGntKESxtoez4eKnc27R
 			domain: removeRoutePath(cleanUrl(window.location.href))
 		}
 
-		axios.post(
-			"https://us-central1-hexa-splash.cloudfunctions.net/initializeTransaction",
-			params
-		).then(response => {
-			console.log(response)
-			dispatch(startTransactionSuccess(response.data))
-			dispatch(goTo("WAIT_FOR_AUTHORIZATION"))
-
-		}).catch(error => {
-			dispatch(startTransactionFailure(error))
-			dispatch(goTo("PROMPT_FOR_PAY"))
-		})
+		axios
+			.post(
+				"https://us-central1-hexa-splash.cloudfunctions.net/initializeTransaction",
+				params
+			)
+			.then(response => {
+				console.log(response)
+				dispatch(startTransactionSuccess(response.data))
+				dispatch(goTo("WAIT_FOR_AUTHORIZATION"))
+			})
+			.catch(error => {
+				dispatch(startTransactionFailure(error))
+				dispatch(goTo("PROMPT_FOR_PAY"))
+			})
 	}
 }
 
