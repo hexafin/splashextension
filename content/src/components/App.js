@@ -14,7 +14,7 @@ import EnterAmount from "./sections/EnterAmount"
 import WaitForAuthorization from "./sections/WaitForAuthorization"
 import WaitForCard from "./sections/WaitForCard"
 import CardCreated from "./sections/CardCreated"
-import { goTo } from "../modules/app"
+import { goTo, startTransaction, updateAmount, updateCard } from "../modules/app"
 
 const Components = {
 	ENTER_SPLASHTAG: EnterSplashtag,
@@ -35,26 +35,6 @@ const App = props => {
 	)
 }
 
-// handleClick(e) {
-// 	axios
-// 		.post(
-// 			"https://us-central1-hexa-splash.cloudfunctions.net/initializeTransaction",
-// 			{
-// 				userId: "TGntKESxtoez4eKnc27R6wgsjr43",
-// 				extensionId: "sample-extension-id",
-// 				relativeAmount: this.state.relativeAmount,
-// 				relativeCurrency: "USD",
-// 				domain: this.state.domain
-// 			}
-// 		)
-// 		.then(response => {
-// 			console.log(response)
-// 		})
-// 		.catch(error => {
-// 			console.log(error)
-// 		})
-// }
-
 const mapStateToProps = state => {
 	return {
 		...state.app
@@ -62,7 +42,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-	return bindActionCreators({ goTo }, dispatch)
+	return bindActionCreators({ goTo, startTransaction, updateAmount, updateCard }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

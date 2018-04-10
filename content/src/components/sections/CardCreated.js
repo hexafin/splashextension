@@ -23,6 +23,10 @@ export default class extends Component {
 	}
 
 	render() {
+
+		const { card } = this.props
+		// TODO: use card details from redux state
+
 		const { showCard } = this.state
 		return (
 			<ContentWrapper>
@@ -68,6 +72,8 @@ export default class extends Component {
 						.CardCreated-image {
 							height: 96px;
 							margin: 30px auto 33px;
+							position: relative;
+							right: 4px;
 						}
 
 						.CardCreated-cardHeaderSection {
