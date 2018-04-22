@@ -1,11 +1,14 @@
 {
   "manifest_version": 2,
-  "name": "RCR",
-  "description": "React, Chrome, and Redux example",
+  "name": "Splash",
+  "description": "Pay with your Bitcoin Splash wallet in your browser",
   "version": "0.0.0.1",
   "background": {
     "scripts": ["event.js"],
     "persistent": true
+  },
+  "icons": {
+    "16": "extensionIcon.png"
   },
   "content_scripts": [
     {
