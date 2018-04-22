@@ -1,5 +1,5 @@
-import ChromePromise from "chrome-promise"
-import { messageTypes } from "./messageTypes"
+import ChromePromise from 'chrome-promise'
+import { messageTypes } from './messageTypes'
 const chromep = new ChromePromise()
 
 // object of open extensions by tabId.
@@ -28,23 +28,23 @@ const addRefreshListener = () => {
 const addCloseTabListener = () => {
     chrome.tabs.onRemoved.addListener(tabId => {
         delete visibleExtensions[tabId]
-        console.log("tab removed", tabId)
+        console.log('tab removed', tabId)
     })
 }
 
 const addExtensionButtonListener = () => {
     chrome.browserAction.onClicked.addListener(function() {
         getCurrentTabId().then(tabId => {
-            console.log("before", tabId, visibleExtensions)
+            console.log('before', tabId, visibleExtensions)
             //if current extension in tab is open already => close
             if (visibleExtensions[tabId]) {
                 closeExtensionInTab(tabId)
                     .then(response => {
                         if (response.closedSuccessfully) {
                             visibleExtensions[tabId] = false
-                            console.log("visibleExtensions", visibleExtensions)
+                            console.log('visibleExtensions', visibleExtensions)
                         } else {
-                            console.log("closing failed", response)
+                            console.log('closing failed', response)
                         }
                     })
                     .catch(e => console.log(e))
@@ -57,17 +57,27 @@ const addExtensionButtonListener = () => {
                         if (response.reopenedSuccessfully) {
                             visibleExtensions[tabId] = true
                         } else {
-                            console.log("opening failed", response)
+                            console.log('opening failed', response)
                         }
                     })
                     .catch(e => console.log(e))
 
                 console.log(
-                    "added current tab to open extensions",
+                    'added current tab to open extensions',
                     visibleExtensions
                 )
             } else {
                 //add contentscript and open extension in the new tab
+                console.log('hey there', visibleExtensions)
+                openExtensionInTab(tabId)
+                    .then(response => {
+                        if (response.reopenedSuccessfully) {
+                            visibleExtensions[tabId] = true
+                        } else {
+                            console.log('opening failed', response)
+                        }
+                    })
+                    .catch(e => console.log(e))
 
                 // sendFile()
 
@@ -76,7 +86,7 @@ const addExtensionButtonListener = () => {
                 // })
 
                 visibleExtensions[tabId] = true
-                console.log("after", tabId, visibleExtensions)
+                console.log('after', tabId, visibleExtensions)
             }
         })
     })
@@ -88,10 +98,10 @@ const addMessageListeners = () => {
             case messageTypes.EXTENSION_WAS_CLOSED_BY_OUTSIDE_CLICK:
                 const tabId = sender.tab.id
                 visibleExtensions[tabId] = false
-                console.log("id", tabId, visibleExtensions)
+                console.log('id', tabId, visibleExtensions)
                 sendResponse({ removedTabIdFromArray: true })
                 return
-            case "GET_CURRENT_TAB_ID":
+            case 'GET_CURRENT_TAB_ID':
                 sendResponse({ tabId: sender.tab.id })
                 return
 
@@ -116,7 +126,7 @@ const getCurrentTabId = () => {
 * @param number tabId
 */
 const closeExtensionInTab = tabId => {
-    console.log("send closing message", tabId)
+    console.log('send closing message', tabId)
     const message = { type: messageTypes.CLOSE_EXTENSION_IN_TAB }
     return chromep.tabs.sendMessage(tabId, message, {})
 }
@@ -126,8 +136,18 @@ const closeExtensionInTab = tabId => {
 * @param number tabId
 */
 const reopenExtensionInTab = tabId => {
-    console.log("send opening message", tabId)
+    console.log('send opening message', tabId)
     const message = { type: messageTypes.REOPEN_EXTENSION_IN_TAB }
+    return chromep.tabs.sendMessage(tabId, message, {})
+}
+
+/*
+* @return void
+* @param number tabId
+*/
+const openExtensionInTab = tabId => {
+    console.log('send opening message', tabId)
+    const message = { type: messageTypes.OPEN_EXTENSION_IN_TAB }
     return chromep.tabs.sendMessage(tabId, message, {})
 }
 

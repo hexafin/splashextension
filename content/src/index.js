@@ -1,27 +1,27 @@
-import React from "react"
-import { render } from "react-dom"
-import { Provider } from "react-redux"
-import App from "./components/App"
-import { parseSite } from "./scrape"
-import { messageTypes } from "./messageTypes"
-import ChromePromise from "chrome-promise"
+import React from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import App from './components/App'
+import { parseSite } from './scrape'
+import { messageTypes } from './messageTypes'
+import ChromePromise from 'chrome-promise'
 const chromep = new ChromePromise()
-import { createStore, applyMiddleware } from "redux"
-import rootReducer from "./modules"
-import { createLogger } from "redux-logger"
-import thunkMiddleware from "redux-thunk"
-import { isCheckoutPage } from "./lib/creditCard"
+import { createStore, applyMiddleware } from 'redux'
+import rootReducer from './modules'
+import { createLogger } from 'redux-logger'
+import thunkMiddleware from 'redux-thunk'
+import { isCheckoutPage } from './lib/creditCard'
 let store
 
-chromep.storage.local.set({ splashtag: "bryce" }).then(r => console.log(r))
+chromep.storage.local.set({ splashtag: 'bryce' }).then(r => console.log(r))
 
 const initStore = () => {
 	let middleware = [thunkMiddleware]
 
 	//add any dev debug tools here
-	if (process.env.NODE_ENV !== "production") {
+	if (process.env.NODE_ENV !== 'production') {
 		const logger = createLogger({
-			level: "info",
+			level: 'info',
 			collapsed: false,
 			diff: true
 		})
@@ -29,16 +29,16 @@ const initStore = () => {
 	}
 
 	store = createStore(rootReducer, applyMiddleware(...middleware))
-	console.log("MAKINGSTORE")
+	console.log('MAKINGSTORE')
 	chromep.storage.local
-		.get("splashtag")
+		.get('splashtag')
 		.then(r => {
-			store.dispatch({ type: "UPDATE_SPLASHTAG", splashtag: r.splashtag })
+			store.dispatch({ type: 'UPDATE_SPLASHTAG', splashtag: r.splashtag })
 		})
-		.catch(e => console.log("e", e))
+		.catch(e => console.log('e', e))
 }
 
-const splashBox = document.createElement("div")
+const splashBox = document.createElement('div')
 
 const init = () => {
 	initStore()
@@ -48,9 +48,9 @@ const init = () => {
 }
 
 const addExtensionContainer = () => {
-	splashBox.id = "splashBox"
+	splashBox.id = 'splashBox'
 	splashBox.style =
-		"position: fixed; width: 300px; background: white; z-index: 2147483647; top: 15px; right: 15px;border-radius: 3px; box-shadow: rgba(37, 53, 70, 0.4) 0px 6px 55px -16px;"
+		'position: fixed; width: 300px; background: white; z-index: 2147483647; top: 15px; right: 15px;border-radius: 3px; box-shadow: rgba(37, 53, 70, 0.4) 0px 6px 55px -16px;'
 	document.body.appendChild(splashBox)
 }
 
@@ -59,7 +59,7 @@ const addReactApp = () => {
 		<Provider store={store}>
 			<App />
 		</Provider>,
-		document.getElementById("splashBox")
+		document.getElementById('splashBox')
 	)
 }
 
@@ -87,17 +87,17 @@ export const closeOnOutsideClickHandler = event => {
 
 const addOutsideClickListener = () => {
 	//hide extension when outside of page is clicked
-	document.addEventListener("click", closeOnOutsideClickHandler)
+	document.addEventListener('click', closeOnOutsideClickHandler)
 }
 
 const removeOutsideClickListener = () => {
-	console.log("removeOutsideClickListener")
-	document.removeEventListener("click", closeOnOutsideClickHandler)
+	console.log('removeOutsideClickListener')
+	document.removeEventListener('click', closeOnOutsideClickHandler)
 }
 
 const addMessageListeners = () => {
 	chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-		console.log("incoming message", request, sender, sendResponse)
+		console.log('incoming message', request, sender, sendResponse)
 		switch (request.type) {
 			case messageTypes.CLOSE_EXTENSION_IN_TAB:
 				try {
@@ -105,7 +105,7 @@ const addMessageListeners = () => {
 					//remove click handler
 					// removeOutsideClickListener()
 				} catch (e) {
-					console.log("try catch", e)
+					console.log('try catch', e)
 				} finally {
 					sendResponse({ closedSuccessfully: true })
 				}
@@ -116,7 +116,19 @@ const addMessageListeners = () => {
 					addExtensionContainer()
 					// addOutsideClickListener()
 				} catch (e) {
-					console.log("opening did not work", e)
+					console.log('opening did not work', e)
+				} finally {
+					sendResponse({ reopenedSuccessfully: true })
+				}
+				return
+			case messageTypes.OPEN_EXTENSION_IN_TAB:
+				try {
+					initStore()
+					addExtensionContainer()
+					addReactApp()
+					// addOutsideClickListener()
+				} catch (e) {
+					console.log('opening did not work', e)
 				} finally {
 					sendResponse({ reopenedSuccessfully: true })
 				}
@@ -136,8 +148,8 @@ const addMessageListeners = () => {
 export const closeExtension = () => {
 	splashBox.parentNode.removeChild(splashBox)
 	removeExtensionFromOpenExtensions()
-		.then(r => console.log("tab removed", r))
-		.catch(e => console.log("not removed", e))
+		.then(r => console.log('tab removed', r))
+		.catch(e => console.log('not removed', e))
 }
 
 export const removeExtensionFromOpenExtensions = () => {
@@ -147,10 +159,11 @@ export const removeExtensionFromOpenExtensions = () => {
 }
 
 //start app
-init()
+// init()
 
-// if (isCheckoutPage()) {
-// 	init()
-// } else {
-// 	//do nothing
-// }
+if (isCheckoutPage()) {
+	init()
+} else {
+	//do nothing
+	initEventListeners()
+}

@@ -15,15 +15,15 @@ export const isCheckoutPage = () => {
 
 export const creditCard = {
 	getExpiryField: () => {
-		const expiry = document.querySelectorAll('[autocomplete="cc-exp"]')
+		const expiry = document.querySelector('[autocomplete="cc-exp"]')
 		return expiry
 	},
 	getNumberField: () => {
-		const number = document.querySelectorAll('[autocomplete="cc-number"]')
+		const number = document.querySelector('[autocomplete="cc-number"]')
 		return number
 	},
 	getCVCField: () => {
-		const cvc = document.querySelectorAll('[autocomplete="cc-csc"]')
+		const cvc = document.querySelector('[autocomplete="cc-csc"]')
 		return cvc
 	}
 }

@@ -1,25 +1,24 @@
-import React, { Component } from "react"
-import { colors, fonts } from "../../lib/constants"
+import React, { Component } from 'react'
+import { colors, fonts } from '../../lib/constants'
 
 const Button = ({ children, onClick, disabled = false, loading = false }) => {
-	let classes = ["splash-btn"]
+	let classes = ['splash-btn']
 
 	if (disabled) {
-		classes.push("disabled")
+		classes.push('disabled')
 	}
 	return (
-		<button disabled={disabled} className={classes.join(" ")} onClick={onClick}>
+		<button disabled={disabled} className={classes.join(' ')} onClick={onClick}>
 			{!loading && children}
-			{loading && "loading..."}
+			{loading && 'loading...'}
 			<style jsx global>
 				{`
 					.splash-btn {
 						top: -2px;
 						font-size: 18px;
-						padding: 13px 25px;
 						background: #5c16ff;
 						color: white;
-						height: auto;
+						height: 51px;
 						border-radius: 4px;
 						border: none;
 						width: 188px;
