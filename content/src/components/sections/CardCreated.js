@@ -1,14 +1,14 @@
-import React, { Component } from "react"
-import Button from "../universal/Button"
-import successImg from "../../assets/success.png"
-import cardSmall from "../../assets/cardSmall.png"
-import { colors, fonts, defaults } from "../../lib/constants"
-import SecuredBy from "../universal/SecuredBy"
-import ContentWrapper from "../universal/ContentWrapper"
-import ContentTitle from "../universal/ContentTitle"
-import Card from "../universal/Card"
-import ExpandableBox from "../universal/ExpandableBox"
-import { creditCard } from "../../lib/creditCard"
+import React, { Component } from 'react'
+import Button from '../universal/Button'
+import successImg from '../../assets/success.png'
+import cardSmall from '../../assets/cardSmall.png'
+import { colors, fonts, defaults } from '../../lib/constants'
+import SecuredBy from '../universal/SecuredBy'
+import ContentWrapper from '../universal/ContentWrapper'
+import ContentTitle from '../universal/ContentTitle'
+import Card from '../universal/Card'
+import ExpandableBox from '../universal/ExpandableBox'
+import { creditCard } from '../../lib/creditCard'
 
 export default class extends Component {
 	constructor(props) {
@@ -20,9 +20,9 @@ export default class extends Component {
 	}
 
 	componentDidMount() {
-		console.log("exp", creditCard.getExpiryField())
-		console.log("number", creditCard.getNumberField())
-		console.log("cvc", creditCard.getCVCField())
+		console.log('exp', creditCard.getExpiryField())
+		console.log('number', creditCard.getNumberField())
+		console.log('cvc', creditCard.getCVCField())
 	}
 
 	toggleCard() {
@@ -53,7 +53,7 @@ export default class extends Component {
 				{showCard && (
 					<div className="CardCreated-cardWrap">
 						<Card
-							expiration={{ month: "09", year: "20" }}
+							expiration={{ month: '09', year: '20' }}
 							number="4323444433323493"
 							cvc="665"
 							postal="802223"
@@ -70,7 +70,7 @@ export default class extends Component {
 						Need help? <a href="mailto:support@hexafinancial.com">Reach out!</a>
 					</div>
 				</div>
-				<div style={{ height: "20px" }} />
+				<div style={{ height: '20px' }} />
 
 				<style jsx global>
 					{`
@@ -89,7 +89,6 @@ export default class extends Component {
 
 						.CardCreated-cardSmall {
 							width: 50px;
-							height: 100%;
 						}
 
 						.CardCreated-cardWrap {
