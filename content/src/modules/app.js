@@ -1,10 +1,10 @@
-import { closeExtension } from "../index"
-import axios from "axios"
-import { cleanUrl, removeRoutePath } from "../lib/urls"
+import { closeExtension } from '../index'
+import axios from 'axios'
+import { cleanUrl, removeRoutePath } from '../lib/urls'
 
 const initialState = {
 	splashtag: null,
-	activeComponent: "PROMPT_FOR_PAY",
+	activeComponent: 'PROMPT_FOR_PAY',
 	isStartingTransaction: false,
 	transactionId: null,
 	amount: null,
@@ -22,14 +22,14 @@ const initialState = {
 	}
 }
 
-const GO_TO = "GO_TO"
-const CLOSE_EXTENSION = "CLOSE_EXTENSION"
-const UPDATE_SPLASHTAG = "UPDATE_SPLASHTAG"
-const UPDATE_AMOUNT = "UPDATE_AMOUNT"
-const START_TRANSACTION_INIT = "START_TRANSACTION_INIT"
-const START_TRANSACTION_SUCCESS = "START_TRANSACTION_SUCCESS"
-const START_TRANSACTION_FAILURE = "START_TRANSACTION_FAILURE"
-const UPDATE_CARD = "UPDATE_CARD"
+const GO_TO = 'GO_TO'
+const CLOSE_EXTENSION = 'CLOSE_EXTENSION'
+const UPDATE_SPLASHTAG = 'UPDATE_SPLASHTAG'
+const UPDATE_AMOUNT = 'UPDATE_AMOUNT'
+const START_TRANSACTION_INIT = 'START_TRANSACTION_INIT'
+const START_TRANSACTION_SUCCESS = 'START_TRANSACTION_SUCCESS'
+const START_TRANSACTION_FAILURE = 'START_TRANSACTION_FAILURE'
+const UPDATE_CARD = 'UPDATE_CARD'
 
 export default (state = initialState, action) => {
 	switch (action.type) {
@@ -110,13 +110,13 @@ export const startTransactionFailure = error => {
 export const startTransaction = (
 	splashtag,
 	amount,
-	userId = "TGntKESxtoez4eKnc27R6wgsjr43",
-	extensionId = "test",
-	currency = "USD"
+	userId = 'TGntKESxtoez4eKnc27R6wgsjr43',
+	extensionId = 'test',
+	currency = 'USD'
 ) => {
 	return dispatch => {
 		dispatch(startTransactionInit())
-
+		dispatch(updateAmount(amount))
 		const params = {
 			splashtag: splashtag,
 			userId: userId,
@@ -128,17 +128,17 @@ export const startTransaction = (
 
 		axios
 			.post(
-				"https://us-central1-hexa-splash.cloudfunctions.net/initializeTransaction",
+				'https://us-central1-hexa-splash.cloudfunctions.net/initializeTransaction',
 				params
 			)
 			.then(response => {
 				console.log(response)
 				dispatch(startTransactionSuccess(response.data))
-				dispatch(goTo("WAIT_FOR_AUTHORIZATION"))
+				dispatch(goTo('WAIT_FOR_AUTHORIZATION'))
 			})
 			.catch(error => {
 				dispatch(startTransactionFailure(error))
-				dispatch(goTo("PROMPT_FOR_PAY"))
+				dispatch(goTo('PROMPT_FOR_PAY'))
 			})
 	}
 }

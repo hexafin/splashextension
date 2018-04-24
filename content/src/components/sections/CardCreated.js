@@ -30,7 +30,7 @@ export default class extends Component {
 	}
 
 	render() {
-		const { card } = this.props
+		const { card, amount, goTo } = this.props
 		// TODO: use card details from redux state
 
 		const { showCard } = this.state
@@ -44,11 +44,13 @@ export default class extends Component {
 					src={chrome.extension.getURL(successImg)}
 				/>
 				<div
-					onClick={() => this.toggleCard()}
+					onClick={() => console.log('click')}
 					className="CardCreated-cardHeaderSection"
 				>
 					<img className="CardCreated-cardSmall" src={cardSmall} />
-					<div className="CardCreated-cardHeader">View magic one-time card</div>
+					<div className="CardCreated-cardHeader">
+						USD ${parseFloat(amount).toFixed(2)}
+					</div>
 				</div>
 				{showCard && (
 					<div className="CardCreated-cardWrap">
@@ -67,6 +69,11 @@ export default class extends Component {
 						account if you don’t use it within one hour.
 					</ExpandableBox>
 					<div className="CardCreated-text">
+						<a onClick={() => goTo('PROMPT_FOR_PAY')}>
+							Wrong amount? Start over!
+						</a>
+					</div>
+					<div className="CardCreated-text final">
 						Need help? <a href="mailto:support@hexafinancial.com">Reach out!</a>
 					</div>
 				</div>
@@ -84,7 +91,7 @@ export default class extends Component {
 						.CardCreated-cardHeaderSection {
 							display: flex;
 							align-items: center;
-							cursor: pointer;
+							// cursor: pointer;
 						}
 
 						.CardCreated-cardSmall {
@@ -99,7 +106,8 @@ export default class extends Component {
 							margin-left: 12px;
 							font-weight: 500;
 							user-select: none;
-							color: ${showCard ? colors.primary : colors.fontdark};
+							color: ${colors.primary};
+							// color: ${showCard ? colors.primary : colors.fontdark};
 						}
 
 						.CardCreated-cardHeader:hover {
@@ -123,6 +131,11 @@ export default class extends Component {
 							color: ${colors.grey};
 							font-size: 14px;
 							transition: all 150ms ease;
+							margin-bottom: 7px;
+						}
+
+						.CardCreated-text .final {
+							margin-bottom: 0;
 						}
 					`}
 				</style>
