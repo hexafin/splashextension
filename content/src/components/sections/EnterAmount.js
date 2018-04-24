@@ -62,7 +62,7 @@ export default class extends Component {
 		console.log('neght', this.state.amount.length > 0)
 		return (
 			<ContentWrapper>
-				<ContentTitle>How much money (in USD) do you need?</ContentTitle>
+				<ContentTitle>How much money do you need (in USD)?</ContentTitle>
 				<div style={{ height: '25px' }} />
 				<Input
 					isValid

@@ -18,7 +18,7 @@ export default () => {
           .checkmark-animation {
             position: absolute;
             right: 17px;
-            top: 27px;
+            top: 23px;
           }
           .checkmark-animation > .react-bodymovin-container {
             width: 20px;

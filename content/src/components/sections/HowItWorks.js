@@ -1,18 +1,17 @@
-import React from "react"
-import Button from "../universal/Button"
-import { colors, fonts } from "../../lib/constants"
-import SecuredBy from "../universal/SecuredBy"
-import ContentWrapper from "../universal/ContentWrapper"
-import ContentTitle from "../universal/ContentTitle"
-import confirmBullet from "../../assets/confirmBullet.png"
-import cardBullet from "../../assets/cardBullet.png"
-import authorizeBullet from "../../assets/authorizeBullet.png"
-
+import React from 'react'
+import Button from '../universal/Button'
+import { colors, fonts } from '../../lib/constants'
+import SecuredBy from '../universal/SecuredBy'
+import ContentWrapper from '../universal/ContentWrapper'
+import ContentTitle from '../universal/ContentTitle'
+import confirmBullet from '../../assets/confirmBullet.png'
+import cardBullet from '../../assets/cardBullet.png'
+import authorizeBullet from '../../assets/authorizeBullet.png'
 
 export default ({ splashtag, goTo }) => (
 	<ContentWrapper>
 		<ContentTitle left>It's easy.</ContentTitle>
-		<div style={{ height: "10px" }} />
+		<div style={{ height: '10px' }} />
 		<BulletPoint icon={confirmBullet} title="Confirm Amount">
 			Make sure the total is correct
 		</BulletPoint>
@@ -20,10 +19,10 @@ export default ({ splashtag, goTo }) => (
 			Securely confirm your purchase through the Splash app
 		</BulletPoint>
 		<BulletPoint icon={cardBullet} title="Pay with magic card">
-			We create a one-time card and autofill everything. Just click pay!{" "}
+			We create a one-time card. Just click to copy and pay!{' '}
 		</BulletPoint>
-		<div style={{ height: "10px" }} />
-		<Button onClick={() => goTo("ENTER_AMOUNT")}>Pay with Bitcoin</Button>
+		<div style={{ height: '10px' }} />
+		<Button onClick={() => goTo('ENTER_AMOUNT')}>Pay with Bitcoin</Button>
 		<SecuredBy />
 		<style jsx global>
 			{``}

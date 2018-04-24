@@ -31,7 +31,7 @@ const Input = ({
                     border: none;
                     height: 63px;
                     outline: none;
-                    box-shadow: rgba(63, 63, 63, 0.09) 0 6px 34px 0;
+                    box-shadow: rgba(63, 63, 63, 0.13) 0 6px 34px 0;
                     border-radius: 4px;
                     -webkit-appearance: none;
                     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
