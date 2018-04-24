@@ -26,7 +26,8 @@ const Button = ({
 					.splash-btn {
 						top: -2px;
 						font-size: 18px;
-						background: #5c16ff;
+						// background: #5c16ff;
+						background: ${colors.primary};
 						color: white;
 						height: 51px;
 						border-radius: 4px;
@@ -52,7 +53,7 @@ const Button = ({
 						background: ${colors.primaryHover};
 						color: white;
 						cursor: pointer;
-						transform: scale(1.02);
+						transform: scale(1.01);
 					}
 
 					.disabled {

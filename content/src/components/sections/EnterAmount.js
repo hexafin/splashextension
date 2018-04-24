@@ -46,6 +46,11 @@ export default class extends Component {
 	onSubmit() {
 		if (this.state.amount > 0.5) {
 			this.props.startTransaction(this.props.splashtag, this.state.amount)
+		} else {
+			this.setState({ shakeInput: true }, () => {
+				const self = this
+				setTimeout(() => self.setState({ shakeInput: false }), 600)
+			})
 		}
 	}
 
@@ -72,6 +77,7 @@ export default class extends Component {
 					value={this.state.amount}
 					showCheckmark={this.state.amountIsValid}
 					handleChange={e => this.validateAmount(e)}
+					shakeAnimation={this.state.shakeInput}
 				/>
 
 				<Hint>
