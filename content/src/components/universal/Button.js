@@ -1,16 +1,26 @@
 import React, { Component } from 'react'
 import { colors, fonts } from '../../lib/constants'
-
-const Button = ({ children, onClick, disabled = false, loading = false }) => {
+import LoadingCircle from './LoadingCircle'
+const Button = ({
+	children,
+	onClick,
+	disableClickOnly,
+	disabled = false,
+	loading = false
+}) => {
 	let classes = ['splash-btn']
 
 	if (disabled) {
 		classes.push('disabled')
 	}
 	return (
-		<button disabled={disabled} className={classes.join(' ')} onClick={onClick}>
+		<button
+			disabled={disableClickOnly}
+			className={classes.join(' ')}
+			onClick={onClick}
+		>
 			{!loading && children}
-			{loading && 'loading...'}
+			{loading && <LoadingCircle />}
 			<style jsx global>
 				{`
 					.splash-btn {

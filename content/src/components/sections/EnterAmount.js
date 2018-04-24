@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Button from '../universal/Button'
 import { colors, fonts } from '../../lib/constants'
 import SecuredBy from '../universal/SecuredBy'
@@ -7,45 +7,92 @@ import ContentTitle from '../universal/ContentTitle'
 import Input from '../universal/Input'
 import { SmileLogo } from '../universal/Icons'
 
-export default ({
-	splashtag,
-	amount,
-	goTo,
-	isStartingTransaction,
-	startTransaction,
-	updateAmount
-}) => (
-	<ContentWrapper>
-		<ContentTitle>How much money (in USD) do you need?</ContentTitle>
-		<div style={{ height: '25px' }} />
-		<Input
-			isValid
-			autoFocus
-			type="number"
-			placeholder="e.g. 24.99"
-			handleChange={e => {
-				updateAmount(e.target.value)
-			}}
-		/>
-		<Hint>
-			After you authorize on your phone, we’ll load this amount on a magic
-			one-time credit card.
-		</Hint>
+export default class extends Component {
+	constructor() {
+		super()
+		this.state = {
+			amount: '',
+			errorMessage: '',
+			amountIsValid: false
+		}
+	}
 
-		<Button
-			disabled={isStartingTransaction}
-			loading={isStartingTransaction}
-			onClick={() => startTransaction(splashtag, amount)}
-		>
-			Confirm USD amount
-		</Button>
+	validateAmount(event) {
+		const amount = event.target.value
 
-		<SecuredBy />
-		<style jsx global>
-			{``}
-		</style>
-	</ContentWrapper>
-)
+		const match = /[1-9]\d*(?:\.\d{0,2})?/.test(amount)
+
+		function countDecimals(num) {
+			var sep = String(23.32).match(/\D/)[0]
+			var b = String(num).split(sep)
+			return b[1] ? b[1].length : 0
+		}
+		const numDigits = countDecimals(amount)
+		if (numDigits > 2) {
+			return
+		}
+
+		if (match) {
+			console.log('is true')
+			this.setState({ amountIsValid: true, amount: amount })
+		} else {
+			this.setState({
+				amount: amount,
+				amountIsValid: false
+			})
+		}
+	}
+
+	onSubmit() {
+		if (this.state.amount > 0.5) {
+			this.props.startTransaction(this.props.splashtag, this.state.amount)
+		}
+	}
+
+	render() {
+		const {
+			splashtag,
+			amount,
+			goTo,
+			isStartingTransaction,
+			startTransaction,
+			updateAmount
+		} = this.props
+		console.log('neght', this.state.amount.length)
+		console.log('neght', this.state.amount.length > 0)
+		return (
+			<ContentWrapper>
+				<ContentTitle>How much money (in USD) do you need?</ContentTitle>
+				<div style={{ height: '25px' }} />
+				<Input
+					isValid
+					autoFocus
+					type="number"
+					placeholder="e.g. 24.99"
+					value={this.state.amount}
+					showCheckmark={this.state.amountIsValid}
+					handleChange={e => this.validateAmount(e)}
+				/>
+
+				<Hint>
+					After you authorize on your phone, we’ll load this amount on a magic
+					one-time credit card.
+				</Hint>
+
+				<Button
+					disableClickOnly={isStartingTransaction}
+					disabled={!this.state.amountIsValid && this.state.amount.length > 0}
+					loading={isStartingTransaction}
+					onClick={() => this.onSubmit()}
+				>
+					Confirm USD amount
+				</Button>
+
+				<SecuredBy />
+			</ContentWrapper>
+		)
+	}
+}
 
 const Hint = ({ children }) => (
 	<div className="Hint">

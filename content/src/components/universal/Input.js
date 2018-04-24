@@ -1,6 +1,6 @@
-import React, { Component } from "react"
-import { colors, defaults, fonts } from "../../lib/constants"
-
+import React, { Component } from 'react'
+import { colors, defaults, fonts } from '../../lib/constants'
+import Checkmark from './Checkmark'
 const Input = ({
     isValid,
     showCheckmark,
@@ -27,7 +27,7 @@ const Input = ({
                     font-size: 18px;
                     padding: 0 20px;
                     font-weight: 500;
-                    color: ${!isValid ? "#ff3366" : colors.dark};
+                    color: ${!isValid ? '#ff3366' : colors.dark};
                     border: none;
                     height: 63px;
                     outline: none;

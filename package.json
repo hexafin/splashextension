@@ -19,6 +19,7 @@
     "postcss-increase-specificity": "^0.6.0",
     "radium": "^0.24.0",
     "react": "^15.5.0",
+    "react-bodymovin": "^1.1.2",
     "react-chrome-redux": "^1.5.0",
     "react-dom": "^15.5.0",
     "react-redux": "^4.0.0",
