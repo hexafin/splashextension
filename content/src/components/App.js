@@ -7,13 +7,16 @@ import { LogoSmallColor } from './universal/Icons'
 import Input from './universal/Input'
 import StyleReset from './StyleReset'
 import axios from 'axios'
-import EnterSplashtag from './sections/EnterSplashtag'
+import EnterPhoneNumber from './sections/EnterPhoneNumber'
 import PromptForPay from './sections/PromptForPay'
 import HowItWorks from './sections/HowItWorks'
 import EnterAmount from './sections/EnterAmount'
 import WaitForAuthorization from './sections/WaitForAuthorization'
 import WaitForCard from './sections/WaitForCard'
 import CardCreated from './sections/CardCreated'
+// import Landing from './sections/Landing'
+import ConfirmCode from './sections/ConfirmCode'
+// import SuccessfullyLinked from './sections/SuccessfullyLinked'
 import {
 	goTo,
 	startTransaction,
@@ -22,7 +25,10 @@ import {
 } from '../modules/app'
 
 const Components = {
-	ENTER_SPLASHTAG: EnterSplashtag,
+	// LANDING: Landing,
+	ENTER_PHONE_NUMBER: EnterPhoneNumber,
+	CONFIRM_CODE: ConfirmCode,
+	// SUCCESSFULLY_LINKED: SuccessfullyLinked,
 	PROMPT_FOR_PAY: PromptForPay,
 	HOW_IT_WORKS: HowItWorks,
 	ENTER_AMOUNT: EnterAmount,

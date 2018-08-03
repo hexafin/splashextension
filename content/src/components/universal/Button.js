@@ -4,6 +4,7 @@ import LoadingCircle from './LoadingCircle'
 const Button = ({
 	children,
 	onClick,
+	id,
 	disableClickOnly,
 	disabled = false,
 	loading = false
@@ -18,6 +19,7 @@ const Button = ({
 			disabled={disableClickOnly}
 			className={classes.join(' ')}
 			onClick={onClick}
+			id={id}
 		>
 			{!loading && children}
 			{loading && <LoadingCircle />}

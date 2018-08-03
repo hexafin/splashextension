@@ -1,10 +1,16 @@
 import { closeExtension } from '../index'
 import axios from 'axios'
 import { cleanUrl, removeRoutePath } from '../lib/urls'
+import { getPhone } from "../api"
+import { auth } from "../firebase"
 
 const initialState = {
 	splashtag: null,
-	activeComponent: 'PROMPT_FOR_PAY',
+	isLinking: false,
+	errorLinking: null,
+	isVerifyingCode: false,
+	errorVerifyingCode: null,
+	activeComponent: 'ENTER_PHONE_NUMBER',
 	isStartingTransaction: false,
 	transactionId: null,
 	amount: null,
@@ -24,8 +30,14 @@ const initialState = {
 
 const GO_TO = 'GO_TO'
 const CLOSE_EXTENSION = 'CLOSE_EXTENSION'
-const UPDATE_SPLASHTAG = 'UPDATE_SPLASHTAG'
+const LINK_INIT = 'LINK_INIT'
+const LINK_SUCCESS = 'LINK_SUCCESS'
+const LINK_FAILURE = 'LINK_FAILURE'
+const VERIFY_CODE_INIT = 'VERIFY_CODE_INIT'
+const VERIFY_CODE_SUCCESS = 'VERIFY_CODE_SUCCESS'
+const VERIFY_CODE_FAILURE = 'VERIFY_CODE_FAILURE'
 const UPDATE_AMOUNT = 'UPDATE_AMOUNT'
+const UPDATE_SPLASHTAG = 'UPDATE_SPLASHTAG'
 const START_TRANSACTION_INIT = 'START_TRANSACTION_INIT'
 const START_TRANSACTION_SUCCESS = 'START_TRANSACTION_SUCCESS'
 const START_TRANSACTION_FAILURE = 'START_TRANSACTION_FAILURE'
@@ -44,22 +56,63 @@ export default (state = initialState, action) => {
 				...state
 			}
 
-		case UPDATE_SPLASHTAG:
-			return {
-				...state,
-				splashtag: action.splashtag
-			}
-
 		case UPDATE_AMOUNT:
 			return {
 				...state,
 				amount: action.amount
 			}
 
+		case UPDATE_SPLASHTAG:
+			return {
+				...state,
+				splashtag: action.splashtag
+			}
+
 		case UPDATE_CARD:
 			return {
 				...state,
 				card: action.card
+			}
+
+		case LINK_INIT:
+			return {
+				...state,
+				isLinking: true,
+				linkingSplashtag: null,
+			}
+
+		case LINK_SUCCESS:
+			return {
+				...state,
+				isLinking: false,
+				linkingSplashtag: action.linkingSplashtag
+			}
+
+		case LINK_FAILURE:
+			return {
+				...state,
+				isLinking: false,
+				errorLinking: action.error
+			}
+
+		case VERIFY_CODE_INIT:
+			return {
+				...state,
+				isVerifyingCode: true
+			}
+
+		case VERIFY_CODE_SUCCESS:
+			return {
+				...state,
+				isVerifyingCode: false,
+				splashtag: action.splashtag
+			}
+
+		case VERIFY_CODE_FAILURE:
+			return {
+				...state,
+				isVerifyingCode: false,
+				errorVerifyingCode: action.error
 			}
 
 		case START_TRANSACTION_INIT:
@@ -84,6 +137,46 @@ export default (state = initialState, action) => {
 
 		default:
 			return state
+	}
+}
+
+export const linkInit = () => {
+	return {
+		type: LINK_INIT
+	}
+}
+
+export const linkSuccess = linkingSplashtag => {
+	return {
+		type: LINK_SUCCESS,
+		linkingSplashtag
+	}
+}
+
+export const linkFailure = error => {
+	return {
+		type: LINK_FAILURE,
+		error
+	}
+}
+
+export const verifyCodeInit = () => {
+	return {
+		type: VERIFY_CODE_INIT
+	}
+}
+
+export const verifyCodeSuccess = splashtag => {
+	return {
+		type: VERIFY_CODE_SUCCESS,
+		splashtag
+	}
+}
+
+export const verifyCodeFailure = error => {
+	return {
+		type: VERIFY_CODE_FAILURE,
+		error
 	}
 }
 
@@ -140,6 +233,24 @@ export const startTransaction = (
 				dispatch(startTransactionFailure(error))
 				dispatch(goTo('PROMPT_FOR_PAY'))
 			})
+	}
+}
+
+export const Link = splashtag => {
+	return dispatch => {
+		// get phone number from splashtag
+		dispatch(linkInit())
+		getPhone(splashtag).then(result => {
+			console.log(result)
+		}).catch(error => {
+			dispatch(linkFailure(error))
+		})
+	}
+}
+
+export const VerifyCode = code => {
+	return dispatch => {
+		
 	}
 }
 

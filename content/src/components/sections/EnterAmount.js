@@ -63,8 +63,6 @@ export default class extends Component {
 			startTransaction,
 			updateAmount
 		} = this.props
-		console.log('neght', this.state.amount.length)
-		console.log('neght', this.state.amount.length > 0)
 		return (
 			<ContentWrapper>
 				<ContentTitle>How much money do you need (in USD)?</ContentTitle>
