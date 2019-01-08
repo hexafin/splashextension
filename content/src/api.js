@@ -14,7 +14,7 @@ var hexaSplash = firebase.initializeApp(config, "splashExtension");
 var db = hexaSplash.firestore()
 
 export const watchTransaction = (transactionId, property, callback) => {
-	db.collection("transactions").doc(transactionId).onSnapshot((snapshot) => {
+	db.collection("cards").doc(transactionId).onSnapshot((snapshot) => {
 		const transactionDoc = snapshot.data()
 		if (transactionDoc[property]) {
 			callback(transactionDoc[property])

@@ -118,14 +118,13 @@ export const startTransaction = (
 		dispatch(startTransactionInit())
 		dispatch(updateAmount(amount))
 		const params = {
-			splashtag: splashtag,
-			userId: userId,
+			splashtag: 'lukas',
+			userId: 'wFeYSXXVBvV3IPumNoMTaIyxFJ82',
 			extensionId: extensionId,
 			amount: amount,
 			currency: currency,
 			domain: removeRoutePath(cleanUrl(window.location.href))
 		}
-
 		axios
 			.post(
 				'https://us-central1-hexa-splash.cloudfunctions.net/initializeTransaction',
