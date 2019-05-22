@@ -6,9 +6,9 @@ export const colors = {
 	textGrey: "#7e7e80",
 	hoverGrey: "#FBFBFB",
 	darkGrey: "#BBBBBB",
-	primary: "#4D00FF",
-	primaryHover: "#5D3EFF",
-	primaryLight: "#F3EFFF",
+	primary: "#20D2A2",
+	primaryHover: "#20D2A2",
+	primaryLight: "rgba(32, 210, 162, 0.1)",
 	primaryMedium: "#A5A1F3"
 }
 

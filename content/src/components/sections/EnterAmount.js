@@ -58,42 +58,39 @@ export default class extends Component {
 		const {
 			splashtag,
 			amount,
+			user_id,
+			extension_uuid,
 			goTo,
 			isStartingTransaction,
 			startTransaction,
 			updateAmount
 		} = this.props
-		console.log('neght', this.state.amount.length)
-		console.log('neght', this.state.amount.length > 0)
+
 		return (
 			<ContentWrapper>
-				<ContentTitle>How much money do you need (in USD)?</ContentTitle>
+				<ContentTitle>How much money (in USD) do you need?</ContentTitle>
 				<div style={{ height: '25px' }} />
 				<Input
 					isValid
 					autoFocus
 					type="number"
 					placeholder="e.g. 24.99"
-					value={this.state.amount}
-					showCheckmark={this.state.amountIsValid}
-					handleChange={e => this.validateAmount(e)}
-					shakeAnimation={this.state.shakeInput}
+					handleChange={e => {
+						updateAmount(e.target.value)
+					}}
 				/>
-
 				<Hint>
 					After you authorize on your phone, we’ll load this amount on a magic
 					one-time credit card.
 				</Hint>
 
 				<Button
-					disableClickOnly={isStartingTransaction}
-					disabled={!this.state.amountIsValid && this.state.amount.length > 0}
+					disabled={isStartingTransaction}
 					loading={isStartingTransaction}
-					onClick={() => this.onSubmit()}
+					onClick={() => startTransaction(splashtag, amount, user_id, extension_uuid)}
 				>
 					Confirm USD amount
 				</Button>
-
 				<SecuredBy />
 			</ContentWrapper>
 		)

@@ -1,6 +1,7 @@
 import ChromePromise from 'chrome-promise'
 import { messageTypes } from './messageTypes'
 const chromep = new ChromePromise()
+import firebase, { auth } from '../../content/src/firebase.js'
 
 // object of open extensions by tabId.
 // e.g. {125: true, 255: false}
@@ -19,6 +20,7 @@ const addListeners = () => {
     addCloseTabListener()
     addRefreshListener()
 }
+
 const addRefreshListener = () => {
     chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
         delete visibleExtensions[tabId]
@@ -104,6 +106,20 @@ const addMessageListeners = () => {
             case 'GET_CURRENT_TAB_ID':
                 sendResponse({ tabId: sender.tab.id })
                 return
+
+            case 'AUTH':
+                if (request.type == "AUTH") {
+                    auth.onAuthStateChanged(function(user) {
+                      if (user) {
+                        var uid = user.uid;
+                        sendResponse({uid: uid});
+                      }
+                    });
+                    auth.signInAnonymously().catch(function(error) {
+                        console.log(error)
+                    });
+                }
+                return true;
 
             default:
                 return

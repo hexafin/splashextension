@@ -1,10 +1,14 @@
-import { closeExtension } from '../index'
-import axios from 'axios'
-import { cleanUrl, removeRoutePath } from '../lib/urls'
+require('firebase')
+import { closeExtension } from "../index"
+import axios from "axios"
+import { cleanUrl, removeRoutePath } from "../lib/urls"
+import firebase, { auth } from '../firebase.js'
 
 const initialState = {
 	splashtag: null,
-	activeComponent: 'PROMPT_FOR_PAY',
+	user_id: null,
+	extension_uuid: null,
+	activeComponent: "ENTER_PHONE_NUMBER",
 	isStartingTransaction: false,
 	transactionId: null,
 	amount: null,
@@ -19,17 +23,29 @@ const initialState = {
 		last4: null,
 		totalCardAmount: null,
 		transactionsMax: null
-	}
+	},
+	phoneNumber: null,
+	isAuthenticating: false,
+	errorAuthenticating: null,
+	isConfirming: false,
+	errorConfirming: null,
+	loggedIn: false,
 }
 
-const GO_TO = 'GO_TO'
-const CLOSE_EXTENSION = 'CLOSE_EXTENSION'
-const UPDATE_SPLASHTAG = 'UPDATE_SPLASHTAG'
-const UPDATE_AMOUNT = 'UPDATE_AMOUNT'
-const START_TRANSACTION_INIT = 'START_TRANSACTION_INIT'
-const START_TRANSACTION_SUCCESS = 'START_TRANSACTION_SUCCESS'
-const START_TRANSACTION_FAILURE = 'START_TRANSACTION_FAILURE'
-const UPDATE_CARD = 'UPDATE_CARD'
+const GO_TO = "GO_TO"
+const CLOSE_EXTENSION = "CLOSE_EXTENSION"
+const UPDATE_SPLASHTAG = "UPDATE_SPLASHTAG"
+const UPDATE_AMOUNT = "UPDATE_AMOUNT"
+const START_TRANSACTION_INIT = "START_TRANSACTION_INIT"
+const START_TRANSACTION_SUCCESS = "START_TRANSACTION_SUCCESS"
+const START_TRANSACTION_FAILURE = "START_TRANSACTION_FAILURE"
+const AUTH_INIT = "AUTH_INIT"
+const AUTH_SUCCESS = "AUTH_SUCCESS"
+const AUTH_FAILURE = "AUTH_FAILURE"
+const CONFIRM_INIT = "CONFIRM_INIT"
+const CONFIRM_SUCCESS = "CONFIRM_SUCCESS"
+const CONFIRM_FAILURE = "CONFIRM_FAILURE"
+const UPDATE_CARD = "UPDATE_CARD"
 
 export default (state = initialState, action) => {
 	switch (action.type) {
@@ -82,6 +98,58 @@ export default (state = initialState, action) => {
 				errorStartingTransaction: action.error
 			}
 
+        case AUTH_INIT:
+            return {
+                ...state,
+                isAuthenticating: true,
+                errorAuthenticating: null,
+                loggedIn: false,
+                phoneNumber: action.phoneNumber,
+                extension_uuid: action.extension_uuid,
+            };
+
+        case AUTH_SUCCESS:
+            return {
+                ...state,
+                isAuthenticating: false,
+                errorAuthenticating: null,
+            };
+
+        case AUTH_FAILURE:
+            return {
+                ...state,
+                isAuthenticating: false,
+                phoneNumber: null,
+                errorAuthenticating: action.error
+            };
+
+        case CONFIRM_INIT:
+            return {
+                ...state,
+                isConfirming: true,
+                errorConfirming: null,
+                loggedIn: false,
+            };
+
+        case CONFIRM_SUCCESS:
+            return {
+                ...state,
+                isConfirming: false,
+                errorConfirming: null,
+                loggedIn: true,
+                phoneNumber: null,
+                splashtag: action.splashtag,
+                user_id: action.user_id,
+            };
+
+        case CONFIRM_FAILURE:
+            return {
+                ...state,
+                isConfirming: false,
+                phoneNumber: null,
+                errorConfirming: action.error
+            };
+
 		default:
 			return state
 	}
@@ -110,17 +178,17 @@ export const startTransactionFailure = error => {
 export const startTransaction = (
 	splashtag,
 	amount,
-	userId = 'TGntKESxtoez4eKnc27R6wgsjr43',
-	extensionId = 'test',
-	currency = 'USD'
+	user_id,
+	extension_uuid,
+	currency = "USD"
 ) => {
 	return dispatch => {
 		dispatch(startTransactionInit())
 		dispatch(updateAmount(amount))
 		const params = {
-			splashtag: 'lukas',
-			userId: 'wFeYSXXVBvV3IPumNoMTaIyxFJ82',
-			extensionId: extensionId,
+			splashtag: splashtag,
+			userId: user_id,
+			extensionId: extension_uuid,
 			amount: amount,
 			currency: currency,
 			domain: removeRoutePath(cleanUrl(window.location.href))
@@ -142,6 +210,111 @@ export const startTransaction = (
 	}
 }
 
+export const AuthInit = (phoneNumber, extension_uuid) => {
+	return {
+		type: AUTH_INIT,
+		phoneNumber,
+		extension_uuid
+	}
+}
+
+export const AuthSuccess = () => {
+	return {
+		type: AUTH_SUCCESS,
+	}
+}
+
+export const AuthFailure = (error) => {
+	return {
+		type: AUTH_FAILURE,
+		error
+	}
+}
+
+// initiate firebase auth
+export const Authenticate = (phoneNumber) => {
+	return (dispatch, getState) => {
+		phoneNumber = '+1' + phoneNumber
+
+		chrome.runtime.sendMessage({type: "AUTH"}, function(response) {
+			const extension_uuid = response.uid
+			const params = {
+				phoneNumber: phoneNumber,
+				extension_uuid: extension_uuid,
+			}
+			axios
+				.post(
+					"https://us-central1-hexa-splash.cloudfunctions.net/linkExtension",
+					params
+				)
+				.then(data => {
+					dispatch(AuthInit(phoneNumber, extension_uuid))
+					dispatch(goTo("ENTER_PIN"))
+				})
+				.catch(error => {
+					dispatch(AuthFailure(error))
+				})
+
+
+		});
+	}
+};
+
+export const ConfirmInit = (pin) => {
+	return {
+		type: CONFIRM_INIT,
+		pin
+	}
+}
+
+export const ConfirmSuccess = (splashtag, user_id) => {
+	return {
+		type: CONFIRM_SUCCESS,
+		splashtag,
+		user_id,
+	}
+}
+
+export const ConfirmFailure = (error) => {
+	return {
+		type: CONFIRM_FAILURE,
+		error
+	}
+}
+
+// confirm pin
+export const Confirm = (pin) => {
+	return (dispatch, getState) => {
+		const state = getState().app
+
+		dispatch(ConfirmInit(pin))
+
+		const params = {
+			phoneNumber: state.phoneNumber,
+			pin: pin,
+			extension_uuid: state.extension_uuid,
+		}
+
+		axios
+			.post(
+				"https://us-central1-hexa-splash.cloudfunctions.net/confirmExtension",
+				params
+			)
+			.then(response => {
+				if (response.data.length == 2) {
+					dispatch(ConfirmSuccess(response.data[0], response.data[1])) // splashtag and user_id
+					dispatch(goTo("PROMPT_FOR_PAY"))
+				} else {
+					dispatch(ConfirmFailure("Incorrect PIN"))
+					dispatch(goTo("ENTER_PHONE_NUMBER"))
+				}
+			})
+			.catch(error => {
+				dispatch(ConfirmFailure(error))
+				dispatch(goTo("ENTER_PHONE_NUMBER"))
+			})
+	}
+};
 export const updateAmount = amount => {
 	return {
 		type: UPDATE_AMOUNT,

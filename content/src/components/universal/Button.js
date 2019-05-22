@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { colors, fonts } from '../../lib/constants'
+
 import LoadingCircle from './LoadingCircle'
+
 const Button = ({
+	id,
 	children,
 	onClick,
 	disableClickOnly,
@@ -15,6 +18,7 @@ const Button = ({
 	}
 	return (
 		<button
+			id={id}
 			disabled={disableClickOnly}
 			className={classes.join(' ')}
 			onClick={onClick}
@@ -26,7 +30,6 @@ const Button = ({
 					.splash-btn {
 						top: -2px;
 						font-size: 18px;
-						// background: #5c16ff;
 						background: ${colors.primary};
 						color: white;
 						height: 51px;
@@ -57,12 +60,12 @@ const Button = ({
 					}
 
 					.disabled {
-						background: #e4e3e5;
+						background: ${colors.lightGrey};
 					}
 
 					.disabled:hover {
 						transform: scale(1);
-						background: #e4e3e5;
+						background: ${colors.lightGrey};
 					}
 				`}
 			</style>
