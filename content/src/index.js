@@ -13,8 +13,6 @@ import thunkMiddleware from 'redux-thunk'
 import { isCheckoutPage } from './lib/creditCard'
 let store
 
-chromep.storage.local.set({ splashtag: 'bryce' }).then(r => console.log(r))
-
 const initStore = () => {
 	let middleware = [thunkMiddleware]
 

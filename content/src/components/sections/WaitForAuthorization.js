@@ -8,10 +8,8 @@ import ContentTitle from "../universal/ContentTitle"
 import { watchTransaction } from "../../api"
 
 export default ({ splashtag, transactionId, goTo, updateCard }) => {
-
-	watchTransaction(transactionId, "txId", (txId) => {
+	watchTransaction(transactionId, "approved", (txId) => {
 		goTo("WAIT_FOR_CARD")
-		console.log(transactionId, "txId", txId)
 	})
 
 	return (

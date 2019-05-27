@@ -6,7 +6,7 @@ const SecuredBy = () => (
 	<div className="SecuredBy">
 		<Lock color={colors.iconGrey} height="12px" />
 		<div className="SecuredBy-text">
-			Payment secured by{" "}
+			secured by{" "}
 			<a href="https://splashwallet.io" target="_blank">
 				Splash
 			</a>
